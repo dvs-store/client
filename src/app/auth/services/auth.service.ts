@@ -1,4 +1,4 @@
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { getPlatform, inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from '../helpers/AuthConfig';
 import { isPlatformBrowser } from '@angular/common';
@@ -9,10 +9,11 @@ import { isPlatformBrowser } from '@angular/common';
 export class AuthService {
 
   private oauthService = inject(OAuthService);
-  private isBrowser = isPlatformBrowser(PLATFORM_ID);
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(){
-    if(this.isBrowser) {
+    if(this.isBrowser){
       this.config();
     }
   }
@@ -24,9 +25,10 @@ export class AuthService {
   }
 
 
-  login() {
+  login() {    
     if(this.isAuthenticated){
       console.log("Already user logged");
+      console.log(this.getAccessToken);
       return;
     }
     this.oauthService.initLoginFlow();
