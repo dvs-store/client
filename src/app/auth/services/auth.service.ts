@@ -22,6 +22,10 @@ export class AuthService {
 
 
   login() {
+    if(this.isAuthenticated()){
+      console.log("Already user logged");
+      return;
+    }
     this.oauthService.initLoginFlow();
   }
 
