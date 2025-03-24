@@ -20,7 +20,7 @@ export class AuthService {
 
 
   private config(){
-    this.oauthService.configure(authConfig);
+    this.oauthService.configure(authConfig());
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
