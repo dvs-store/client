@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { INavLink } from '../interfaces/navbar/INavLink';
 
 @Component({
   selector: 'navbar',
-  imports: [RouterLink, MatButtonModule],
+  imports: [RouterLink, RouterLinkActive, MatButtonModule],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {

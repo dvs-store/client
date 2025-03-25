@@ -4,17 +4,15 @@
     <div>
         <h1
             routerLink="/"
-            class="text-indigo-500 cursor-pointer font-bold text-xl">DevComplete <span class="text-white">Studios</span>
+            class="text-indigo-500 cursor-pointer font-bold md:text-2xl text-xl">DevComplete <span class="text-white">Studios</span>
         </h1>
     </div>
 
     <div class="flex items-center gap-6">
         @for (link of links(); track $index) {
-            <a [routerLink]="link.path">
+            <a routerLinkActive="opacity-100" class="opacity-70" [routerLink]="link.path" [title]="link.name">
                 <img
-                    width="45px"
-                    height="45px"
-                    class="w-[45px] h-[45px]"
+                    class="w-9 h-9"
                     src="/icons/{{link.icon}}.svg"
                     [alt]="link.name"
                 >
