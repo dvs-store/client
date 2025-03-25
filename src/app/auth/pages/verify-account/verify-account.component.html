@@ -1,4 +1,13 @@
 
 
-<h1 class="text-center mt-24 text-4xl text-white"> {{token()}} </h1>
+<section class="w-full py-5 rounded-md bg-gray-200 mt-32 text-black">
+    @if (error()) {
+        <h2 class="text-center text-xl font-bold">Token expired</h2>
+    }@else {
+        <h2 class="text-center text-xl font-bold">Account verified</h2>
+        <div class="flex justify-center mt-3">
+            <button mat-flat-button (click)="login()">Sign in</button>
+        </div>
+    }
+</section>
 
