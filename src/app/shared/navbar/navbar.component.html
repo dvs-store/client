@@ -1,7 +1,44 @@
 
 
-<nav class="flex justify-center py-5 px-12">
-    <button class="px-2 py-1 rounded-lg shadow-md bg-indigo-500" (click)="authService.login()">Login</button>
-    <button class="px-2 py-1 rounded-lg shadow-md bg-indigo-500" (click)="authService.logout()">Logout</button>
-</nav>
+<section class="flex justify-between py-5 px-12">
+    <div>
+        <h1
+            routerLink="/"
+            class="text-indigo-500 cursor-pointer font-bold text-xl">DevComplete <span class="text-white">Studios</span>
+        </h1>
+    </div>
+
+    <div class="flex items-center gap-6">
+        @for (link of links(); track $index) {
+            <a [routerLink]="link.path">
+                <img
+                    width="45px"
+                    height="45px"
+                    class="w-[45px] h-[45px]"
+                    src="/icons/{{link.icon}}.svg"
+                    [alt]="link.name"
+                >
+            </a>
+        }
+    </div>
+
+    @if (authService.isAuthenticated) {
+        <div class="flex items-center gap-3">
+            <button mat-flat-button (click)="authService.logout()">Logout</button>
+            <img
+                routerLink="/profile"
+                class="w-12 h-12 rounded-full outline-2 outline-blue-500 cursor-pointer"
+                height="48px"
+                width="48px"
+                src="https://wallpapers.com/images/featured/fotos-de-perfil-xj8jigxkai9jag4g.jpg"
+                alt="Image profile"
+                >
+        </div>
+    }@else {
+        <div class="flex items-center gap-3">
+            <button mat-flat-button (click)="authService.login()">Login</button>
+            <button routerLink="/register" mat-raised-button>Create account</button>
+        </div>
+    }
+</section>
 
