@@ -8,15 +8,14 @@
         </h1>
     </div>
 
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-4">
         @for (link of links(); track $index) {
-            <a routerLinkActive="opacity-100" class="opacity-70" [routerLink]="link.path" [title]="link.name">
-                <img
-                    class="w-9 h-9"
-                    src="/icons/{{link.icon}}.svg"
-                    [alt]="link.name"
-                >
-            </a>
+            <a
+                routerLinkActive="opacity-100"
+                class="opacity-70"
+                [routerLink]="link.path"
+                [title]="link.name"
+            >{{link.name}}</a>
         }
     </div>
 

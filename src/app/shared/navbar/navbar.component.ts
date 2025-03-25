@@ -15,23 +15,23 @@ export class NavbarComponent {
   protected links = signal<INavLink[]>([
     {
       name: 'Home',
-      path: '/',
-      icon: 'home',
+      path: '/'
     },
     {
-      name: 'Ranking',
-      path: '/ranking',
-      icon: 'ranking',
+      name: 'Products',
+      path: '/products'
     },
     {
-      name: 'Messages',
-      path: '/messages',
-      icon: 'messages',
+      name: 'Services',
+      path: '/services'
+    },
+    {
+      name: 'Subscriptions',
+      path: '/subscriptions'
     },
     {
       name: 'Support',
-      path: '/support',
-      icon: 'support',
+      path: '/support'
     },
   ]);
 

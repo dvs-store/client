@@ -5,6 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { IAuthUser } from '../interfaces/IAuthUser';
 import { HttpClient } from '@angular/common/http';
+import { IRegisterUser } from '../interfaces/IRegisterUser';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,13 @@ export class AuthService {
     return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/users/verify/${token}`)
       .pipe(
         tap(usr => this.user.set(usr))
+      );
+  }
+
+  public createAccount(user:IRegisterUser):Observable<IAuthUser>{
+    return this.httpClient.post<IAuthUser>(`${this.SERVER_URL}`, user)
+      .pipe(
+        tap(user => this.user.set(user)),
       );
   }
 
