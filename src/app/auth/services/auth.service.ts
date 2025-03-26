@@ -22,6 +22,7 @@ export class AuthService {
   constructor(){
     if(this.isBrowser){
       this.config();
+      this.oauthService.setStorage(localStorage);
     }
   }
 
@@ -46,8 +47,13 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
-    if(!this.oauthService.hasValidAccessToken() && this.getAccessToken) this.oauthService.refreshToken();
-    return this.oauthService.hasValidAccessToken();
+    const isLogged = this.oauthService.hasValidAccessToken()
+    if(!isLogged && this.getAccessToken) this.oauthService.refreshToken();
+    if(isLogged && this.isBrowser){
+      window.localStorage.setItem('token', this.getAccessToken);
+    }
+
+    return isLogged;
   }
 
   public get getUser():IAuthUser | null{
