@@ -8,18 +8,28 @@ import {
   FormGroup,
 } from '@angular/forms';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {merge} from 'rxjs';
+import {finalize, merge} from 'rxjs';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ValidatePasswordFn } from '../../../shared/functions/ValidatePasswordFn';
 import { Meta, Title } from '@angular/platform-browser';
+import { Router, RouterLink } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, MatInputModule, MatFormFieldModule, FormsModule, MatButtonModule, MatIconModule],
+  imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './register-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,11 +52,14 @@ export default class RegisterPageComponent implements OnInit {
     event.stopPropagation();
   }
   protected isLoading = signal<boolean>(false);
+  protected signUpError = signal<string | null>(null);
+  protected signUpSucces = signal<string | null>(null);
 
 
   constructor(
     private title:Title,
-    private meta:Meta
+    private meta:Meta,
+    private route:Router,
   ){
     merge(this.form.valueChanges, this.form.statusChanges)
       .pipe(takeUntilDestroyed())
@@ -61,7 +74,6 @@ export default class RegisterPageComponent implements OnInit {
       content: 'Registro rápido y seguro en nuestra tienda online. Crea tu cuenta en segundos y disfruta de beneficios exclusivos.' 
     });
 
-    // Etiquetas Open Graph para redes sociales
     this.meta.addTag({ 
       property: 'og:title', 
       content: 'DevComplete Studios' 
@@ -72,16 +84,41 @@ export default class RegisterPageComponent implements OnInit {
     });
   }
 
+  protected login(){
+    this.authService.login();
+  }
 
   protected signUp(){
-    if(this.form.invalid) return;
+    if(this.form.invalid || this.isLoading()) return;
+    if(this.authService.isAuthenticated){
+      this.route.navigate(['/']);
+      return;
+    };
+
+    const {email, name, password} = this.form.controls;
+    this.isLoading.set(true);
+
+    this.authService.createAccount({email: email.value!, password: password.value!, username: name.value!})
+      .pipe(
+        finalize(() => this.isLoading.set(false)),
+      )
+      .subscribe({
+        error: (error) => {
+          this.form.controls.password.reset();
+          this.signUpSucces.set(null);
+          console.log(error);
+          this.signUpError.set('Error');
+        },
+        next: () => {
+          this.form.reset();
+          this.signUpError.set(null);
+          this.signUpSucces.set('An email has been sent to confirm your account.');
+        }
+      })
   }
 
   private handleErrors(){
-    const controls = this.form.controls;
-    const email = controls.email;
-    const name = controls.name;
-    const password = controls.password;
+    const {email, name, password} = this.form.controls;
 
     if(email.hasError('email')){
       this.formErrors().email.set('Email is not valid');
@@ -103,6 +140,7 @@ export default class RegisterPageComponent implements OnInit {
     }else {
       this.formErrors().password.set(null);
     }
+  
   }
 
 }

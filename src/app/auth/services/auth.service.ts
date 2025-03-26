@@ -61,7 +61,7 @@ export class AuthService {
   }
 
   public createAccount(user:IRegisterUser):Observable<IAuthUser>{
-    return this.httpClient.post<IAuthUser>(`${this.SERVER_URL}`, user)
+    return this.httpClient.post<IAuthUser>(`${this.SERVER_URL()}/users`, user)
       .pipe(
         tap(user => this.user.set(user)),
       );

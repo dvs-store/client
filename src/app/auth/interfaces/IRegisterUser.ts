@@ -4,6 +4,6 @@
 export interface IRegisterUser {
     email: string;
     username: string;
-    profileImage: any;
+    profileImage?: any;
     password: string;
 }
