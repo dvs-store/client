@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {
   FormControl,
@@ -14,6 +14,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ValidatePasswordFn } from '../../../shared/functions/ValidatePasswordFn';
+import { Meta, Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,7 +23,7 @@ import { ValidatePasswordFn } from '../../../shared/functions/ValidatePasswordFn
   templateUrl: './register-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RegisterPageComponent {
+export default class RegisterPageComponent implements OnInit {
 
   protected form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,18 +41,40 @@ export default class RegisterPageComponent {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
+  protected isLoading = signal<boolean>(false);
 
 
-  constructor(){
+  constructor(
+    private title:Title,
+    private meta:Meta
+  ){
     merge(this.form.valueChanges, this.form.statusChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.handleErrors())
   }
 
+  ngOnInit(): void {
+    this.title.setTitle('DVS | Register');
+
+    this.meta.updateTag({ 
+      name: 'description', 
+      content: 'Registro rápido y seguro en nuestra tienda online. Crea tu cuenta en segundos y disfruta de beneficios exclusivos.' 
+    });
+
+    // Etiquetas Open Graph para redes sociales
+    this.meta.addTag({ 
+      property: 'og:title', 
+      content: 'DevComplete Studios' 
+    });
+    this.meta.addTag({ 
+      property: 'og:description', 
+      content: 'Easy and secure registration. Access the best products and services.' 
+    });
+  }
+
 
   protected signUp(){
     if(this.form.invalid) return;
-    console.log("Si paso");
   }
 
   private handleErrors(){
@@ -77,7 +100,6 @@ export default class RegisterPageComponent {
     if(password.hasError('passwordError')) {
       const field = password.getError('passwordError')
       this.formErrors().password.set(field);
-      console.log(field);
     }else {
       this.formErrors().password.set(null);
     }
