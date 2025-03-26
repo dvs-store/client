@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ValidatePasswordFn } from '../../../shared/functions/ValidatePasswordFn';
 
 
 @Component({
@@ -25,8 +26,8 @@ export default class RegisterPageComponent {
 
   protected form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(70)]),
-    name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]),
+    password: new FormControl('', [Validators.required, ValidatePasswordFn()]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
   });
   protected formErrors = signal({
     email: signal<string | null>(null),
@@ -56,8 +57,8 @@ export default class RegisterPageComponent {
   private handleErrors(){
     const controls = this.form.controls;
     const email = controls.email;
-    const name = controls.email;
-    const password = controls.email;
+    const name = controls.name;
+    const password = controls.password;
 
     if(email.hasError('email')){
       this.formErrors().email.set('Email is not valid');
@@ -73,10 +74,10 @@ export default class RegisterPageComponent {
       this.formErrors().name.set(null);
     }
 
-    if(password.hasError('maxlength')){
-      this.formErrors().password.set('Password is too long');
-    }else if(password.hasError('minlength')){
-      this.formErrors().password.set('Password is too short');
+    if(password.hasError('passwordError')) {
+      const field = password.getError('passwordError')
+      this.formErrors().password.set(field);
+      console.log(field);
     }else {
       this.formErrors().password.set(null);
     }

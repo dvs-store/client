@@ -42,7 +42,7 @@
 
   <mat-form-field>
     <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide() ? 'password' : 'text'" [formControl]="form.controls.password"/>
+    <input placeholder="password123" matInput [type]="hide() ? 'password' : 'text'" [formControl]="form.controls.password"/>
     <button
       mat-icon-button
       matSuffix
@@ -52,6 +52,7 @@
     >
       <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
+    <mat-error>{{formErrors().password()}}</mat-error>
   </mat-form-field>
 
   <button
