@@ -3,12 +3,13 @@ import { AuthService } from '../../auth/services/auth.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { INavLink } from '../interfaces/navbar/INavLink';
+import { ProfileImageComponent } from "../components/profile-image/profile-image.component";
 
 
 
 @Component({
   selector: 'navbar',
-  imports: [RouterLink, RouterLinkActive, MatButtonModule],
+  imports: [RouterLink, RouterLinkActive, MatButtonModule, ProfileImageComponent],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {

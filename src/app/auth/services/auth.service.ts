@@ -46,6 +46,7 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
+    if(!this.oauthService.hasValidAccessToken() && this.getAccessToken) this.oauthService.refreshToken();
     return this.oauthService.hasValidAccessToken();
   }
 

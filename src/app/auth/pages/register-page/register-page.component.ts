@@ -89,6 +89,7 @@ export default class RegisterPageComponent implements OnInit {
   }
 
   protected signUp(){
+    console.log(this.authService.isAuthenticated);
     if(this.form.invalid || this.isLoading()) return;
     if(this.authService.isAuthenticated){
       this.route.navigate(['/']);

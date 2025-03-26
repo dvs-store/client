@@ -22,14 +22,7 @@
     @if (authService.isAuthenticated) {
         <div class="flex items-center gap-3">
             <button mat-flat-button (click)="authService.logout()">Logout</button>
-            <img
-                routerLink="/profile"
-                class="w-12 h-12 rounded-full outline-2 outline-blue-500 cursor-pointer"
-                height="48px"
-                width="48px"
-                src="https://wallpapers.com/images/featured/fotos-de-perfil-xj8jigxkai9jag4g.jpg"
-                alt="Image profile"
-                >
+            <profile-image/>
         </div>
     }@else {
         <div class="flex items-center gap-3">
