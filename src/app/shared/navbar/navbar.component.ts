@@ -4,12 +4,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { INavLink } from '../interfaces/navbar/INavLink';
 import { ProfileImageComponent } from "../components/profile-image/profile-image.component";
-
+import {MatMenuModule} from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'navbar',
-  imports: [RouterLink, RouterLinkActive, MatButtonModule, ProfileImageComponent],
+  imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {

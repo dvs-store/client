@@ -1,6 +1,6 @@
 
 
-<section class="flex justify-between py-5 px-12">
+<section class="flex justify-between py-5 px-16">
     <div>
         <h1
             routerLink="/"
@@ -20,10 +20,24 @@
     </div>
 
     @if (authService.isAuthenticated) {
-        <div class="flex items-center gap-3">
-            <button mat-flat-button (click)="authService.logout()">Logout</button>
+        <button mat-button [matMenuTriggerFor]="menu">
             <profile-image/>
-        </div>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Profile
+                <mat-icon fontIcon="person"/>
+            </button>
+            <button mat-menu-item>Support
+                <mat-icon fontIcon="support_agent"/>
+            </button>
+            <button mat-menu-item>Settings
+                <mat-icon fontIcon="settings"/>
+            </button>
+            <button (click)="authService.logout()" mat-menu-item>Logout
+                <mat-icon fontIcon="logout"/>
+            </button>
+        </mat-menu>
     }@else {
         <div class="flex items-center gap-3">
             <button mat-flat-button (click)="authService.login()">Login</button>
