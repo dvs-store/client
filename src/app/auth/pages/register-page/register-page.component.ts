@@ -88,6 +88,10 @@ export default class RegisterPageComponent implements OnInit {
     this.authService.login();
   }
 
+  protected loginWithGoogle(){
+    this.authService.loginWithGoogle();
+  }
+
   protected signUp(){
     console.log(this.authService.isAuthenticated);
     if(this.form.invalid || this.isLoading()) return;
