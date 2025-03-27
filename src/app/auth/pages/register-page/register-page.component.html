@@ -34,6 +34,7 @@
       <mat-label>Enter your password</mat-label>
       <input placeholder="password123" matInput [type]="hide() ? 'password' : 'text'" [formControl]="form.controls.password"/>
       <button
+        type="button"
         mat-icon-button
         matSuffix
         (click)="clickEvent($event)"

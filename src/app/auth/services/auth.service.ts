@@ -47,13 +47,7 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
-    const isLogged = this.oauthService.hasValidAccessToken()
-    if(!isLogged && this.getAccessToken) this.oauthService.refreshToken();
-    if(isLogged && this.isBrowser){
-      window.localStorage.setItem('token', this.getAccessToken);
-    }
-
-    return isLogged;
+    return this.oauthService.hasValidAccessToken();
   }
 
   public get getUser():IAuthUser | null{
