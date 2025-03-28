@@ -1,6 +1,4 @@
 
-
-
 export interface IRegisterUser {
     email: string;
     username: string;

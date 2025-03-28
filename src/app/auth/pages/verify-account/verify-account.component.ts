@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -25,11 +25,7 @@ export default class VerifyAccountComponent implements OnInit {
       });
   }
 
-
   protected login(){
-    if(this.authService.isAuthenticated){
-      this.authService.logout()
-    }
     this.authService.login();
   }
 

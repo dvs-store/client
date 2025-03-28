@@ -27,16 +27,8 @@ export class AuthService {
 
 
   private config() {
-    const isAuthenticatedGoogle:boolean = JSON.parse(localStorage.getItem("GOOGLE_AUTHENTICATED")?? 'null') ?? false;
     this.oauthService.setStorage(localStorage);
     this.oauthService.configure(authConfig());
-    console.log(isAuthenticatedGoogle);
-
-    if( isAuthenticatedGoogle ){
-      localStorage.removeItem("GOOGLE_AUTHENTICATED");
-      this.oauthService.initLoginFlow();
-    }
-  
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
@@ -64,7 +56,7 @@ export class AuthService {
   public verifyAccount(token:string):Observable<IAuthUser>{
     return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/users/verify/${token}`)
       .pipe(
-        tap(usr => this.user.set(usr))
+        tap(usr => this.user.set(usr)),
       );
   }
 
@@ -77,7 +69,6 @@ export class AuthService {
 
   public loginWithGoogle(){
     if(this.isBrowser){
-      localStorage.setItem("GOOGLE_AUTHENTICATED", "true");
       window.location.href = `http://127.0.0.1:9100/oauth2/authorization/google`;
     }
   }
