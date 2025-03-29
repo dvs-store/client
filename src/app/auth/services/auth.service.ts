@@ -30,6 +30,7 @@ export class AuthService {
     this.oauthService.setStorage(localStorage);
     this.oauthService.configure(authConfig());
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    // this.oauthService.initCodeFlow();
   }
 
   login() {    
@@ -57,6 +58,11 @@ export class AuthService {
     return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/users/verify/${token}`)
       .pipe(
         tap(usr => this.user.set(usr)),
+        tap(usr => {
+          if(this.isBrowser){
+            localStorage.setItem('access_token', usr.token!);
+          }
+        }),
       );
   }
 

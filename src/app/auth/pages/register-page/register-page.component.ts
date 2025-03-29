@@ -103,7 +103,7 @@ export default class RegisterPageComponent implements OnInit {
     const {email, name, password} = this.form.controls;
     this.isLoading.set(true);
 
-    this.authService.createAccount({email: email.value!, password: password.value!, username: name.value!})
+    this.authService.createAccount({email: email.value!, password: password.value!, name: name.value!})
       .pipe(
         finalize(() => this.isLoading.set(false)),
       )
