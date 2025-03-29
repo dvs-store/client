@@ -19,32 +19,9 @@
           <mat-error>{{formErrors().name()}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-          <mat-label>Enter your email</mat-label>
-          <input
-              type="email"
-              matInput
-              placeholder="correo@example.com"
-              [formControl]="form.controls.email"
-          />
-          <mat-error>{{formErrors().email()}}</mat-error>
-    </mat-form-field>
+      <input-email formControlName="email"/>
+      <input-password formControlName="password"/>
 
-    <mat-form-field>
-      <mat-label>Enter your password</mat-label>
-      <input placeholder="password123" matInput [type]="hide() ? 'password' : 'text'" [formControl]="form.controls.password"/>
-      <button
-        type="button"
-        mat-icon-button
-        matSuffix
-        (click)="clickEvent($event)"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide()"
-      >
-        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-      <mat-error>{{formErrors().password()}}</mat-error>
-    </mat-form-field>
     <div class="divider mb-1">
         <span>or</span>
     </div>
