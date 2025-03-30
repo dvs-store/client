@@ -21,7 +21,7 @@
 
     @if (authService.isAuthenticated) {
         <button mat-button [matMenuTriggerFor]="menu">
-            <profile-image/>
+            <profile-image [imageUrl]="authService.getUser?.avatar"/>
         </button>
 
         <mat-menu #menu="matMenu">

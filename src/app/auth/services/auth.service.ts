@@ -4,7 +4,7 @@ import { authConfig } from '../helpers/AuthConfig';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { IRegisterUser } from '../interfaces/IRegisterUser';
 import { ILoginUser } from '../interfaces/ILoginUser';
 
@@ -31,7 +31,6 @@ export class AuthService {
     this.oauthService.setStorage(localStorage);
     this.oauthService.configure(authConfig());
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
-    // this.oauthService.initCodeFlow();
   }
 
   signIn(data: ILoginUser):Observable<IAuthUser>{
@@ -85,6 +84,10 @@ export class AuthService {
     if(this.isBrowser){
       window.location.href = `http://127.0.0.1:9100/oauth2/authorization/google`;
     }
+  }
+
+  public get getUserLogged():IAuthUser | null {
+    return this.user();
   }
 
 }
