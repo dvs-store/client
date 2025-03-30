@@ -7,7 +7,7 @@
   <form
     (submit)="signUp()"
     [formGroup]="form"
-    class="md:max-w-2xl flex flex-col w-full md:mx-auto mx-5 rounded-xl px-6 py-10 bg-gray-100 mt-32 text-black"
+    class="md:max-w-2xl flex flex-col md:mx-auto mx-8 rounded-xl px-6 py-10 bg-gray-100 mt-32 text-black"
   >
       <mat-form-field>
           <mat-label>Enter your name</mat-label>
@@ -28,15 +28,8 @@
     <div class="flex md:flex-row flex-col items-center gap-5 md:justify-center">
       <p
         class="text-sm mb-3 cursor-pointer"
-        (click)="login()"
-      >Already have account? <span class="underline underline-offset-2 text-blue-500">Sign in</span></p>
-      <button
-          (click)="loginWithGoogle()"
-          type="button"
-          class="bg-white shadow-md rounded-xl px-2 py-1 cursor-pointer transition-all flex gap-1 items-center justify-center mb-4 hover:opacity-80">
-          <img src="/icons/google.svg" class="w-7 h-7" width="28px" height="28px" alt="Google icon">
-          Continue with google
-      </button>
+      >Already have account? <a routerLink="/login" class="underline underline-offset-2 text-blue-500">Sign in</a></p>
+      <login-google/>
     </div>
 
     @if (signUpError()) {

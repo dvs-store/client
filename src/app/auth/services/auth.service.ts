@@ -1,11 +1,12 @@
-import { getPlatform, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from '../helpers/AuthConfig';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, tap } from 'rxjs';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IRegisterUser } from '../interfaces/IRegisterUser';
+import { ILoginUser } from '../interfaces/ILoginUser';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,20 @@ export class AuthService {
     // this.oauthService.initCodeFlow();
   }
 
-  login() {    
-    if(this.isAuthenticated) return;
+  signIn(data: ILoginUser):Observable<IAuthUser>{
+    const url:string = 'http://localhost:8080/api/users/login';
+    return this.httpClient.post<IAuthUser>(url, data)
+      .pipe(
+        tap(user => this.user.set(user)),
+        tap(user => {
+          if( this.isBrowser ){
+            localStorage.setItem('access_token', user.token!);
+          }
+        })
+      );
+  }
+
+  login(){
     this.oauthService.initLoginFlow();
   }
 
@@ -58,11 +71,6 @@ export class AuthService {
     return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/users/verify/${token}`)
       .pipe(
         tap(usr => this.user.set(usr)),
-        tap(usr => {
-          if(this.isBrowser){
-            localStorage.setItem('access_token', usr.token!);
-          }
-        }),
       );
   }
 

@@ -15,10 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ValidatePasswordFn } from '../../../shared/functions/ValidatePasswordFn';
 import { Meta, Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InputEmailComponent } from "../../components/input-email/input-email.component";
 import { InputPasswordComponent } from "../../components/input-password/input-password.component";
+import { LoginGoogleComponent } from "../../components/login-google/login-google.component";
 
 
 @Component({
@@ -32,7 +33,9 @@ import { InputPasswordComponent } from "../../components/input-password/input-pa
     MatIconModule,
     MatProgressSpinnerModule,
     InputEmailComponent,
-    InputPasswordComponent
+    InputPasswordComponent,
+    RouterLink,
+    LoginGoogleComponent
 ],
   templateUrl: './register-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,11 +88,6 @@ export default class RegisterPageComponent implements OnInit {
     });
   }
 
-
-  protected login(){
-    this.authService.login();
-  }
-
   protected loginWithGoogle(){
     this.authService.loginWithGoogle();
   }
@@ -135,6 +133,10 @@ export default class RegisterPageComponent implements OnInit {
       this.formErrors().name.set(null);
     }
   
+  }
+
+  protected login(){
+    this.authService.login();
   }
 
 }
