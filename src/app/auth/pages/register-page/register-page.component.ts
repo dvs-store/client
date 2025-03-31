@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InputEmailComponent } from "../../components/input-email/input-email.component";
 import { InputPasswordComponent } from "../../components/input-password/input-password.component";
 import { LoginGoogleComponent } from "../../components/login-google/login-google.component";
+import { HandleErrorsFn } from '../../../shared/functions/HandleErrorsFn';
 
 
 @Component({
@@ -108,12 +109,7 @@ export default class RegisterPageComponent implements OnInit {
         finalize(() => this.isLoading.set(false)),
       )
       .subscribe({
-        error: (error) => {
-          this.form.controls.password.reset();
-          this.signUpSucces.set(null);
-          console.log(error);
-          this.signUpError.set('Error');
-        },
+        error: (error) => this.signUpError.set(HandleErrorsFn(error)),
         next: () => {
           this.form.reset();
           this.signUpError.set(null);

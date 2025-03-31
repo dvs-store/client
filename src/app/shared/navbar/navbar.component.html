@@ -40,7 +40,7 @@
         </mat-menu>
     }@else {
         <div class="flex items-center gap-3">
-            <a mat-flat-button routerLink="/login">Login</a>
+            <a (click)="authService.login()" mat-flat-button>Login</a>
             <button routerLink="/register" mat-raised-button>Create account</button>
         </div>
     }

@@ -6,7 +6,6 @@ import { Observable, tap } from 'rxjs';
 import { IAuthUser } from '../interfaces/IAuthUser';
 import { HttpClient } from '@angular/common/http';
 import { IRegisterUser } from '../interfaces/IRegisterUser';
-import { ILoginUser } from '../interfaces/ILoginUser';
 
 @Injectable({
   providedIn: 'root'
@@ -26,24 +25,10 @@ export class AuthService {
     }
   }
 
-
   private config() {
     this.oauthService.setStorage(localStorage);
     this.oauthService.configure(authConfig());
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
-
-  signIn(data: ILoginUser):Observable<IAuthUser>{
-    const url:string = 'http://localhost:8080/api/users/login';
-    return this.httpClient.post<IAuthUser>(url, data)
-      .pipe(
-        tap(user => this.user.set(user)),
-        tap(user => {
-          if( this.isBrowser ){
-            localStorage.setItem('access_token', user.token!);
-          }
-        })
-      );
   }
 
   login(){
