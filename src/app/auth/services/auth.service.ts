@@ -1,8 +1,8 @@
-import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from '../helpers/AuthConfig';
 import { isPlatformBrowser } from '@angular/common';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { IAuthUser } from '../interfaces/IAuthUser';
 import { HttpClient } from '@angular/common/http';
 import { IRegisterUser } from '../interfaces/IRegisterUser';
@@ -17,7 +17,7 @@ export class AuthService {
   private httpClient = inject(HttpClient)
   private isBrowser = isPlatformBrowser(this.platformId);
   private SERVER_URL = signal<string>("http://localhost:8080/api/users");
-  private user = signal<IAuthUser | null>(null);
+  public user = signal<IAuthUser | null>(null);
 
   constructor(){
     if(this.isBrowser){
@@ -26,20 +26,22 @@ export class AuthService {
   }
 
   private config() {
-    this.oauthService.setStorage(localStorage);
     this.oauthService.configure(authConfig());
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    this.oauthService.setStorage(localStorage);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(data => console.log(data));
   }
 
   login(){
+    if( this.isAuthenticated ) return;
     this.oauthService.initLoginFlow();
   }
 
   logout() {
+    if( !this.isAuthenticated ) return;
     this.oauthService.logOut();
   }
 
-  get getAccessToken(): string {
+  get getAccessToken():string {
     return this.oauthService.getAccessToken();
   }
 
@@ -47,7 +49,7 @@ export class AuthService {
     return this.oauthService.hasValidAccessToken();
   }
 
-  public get getUser():IAuthUser | null{
+  public get getUser():IAuthUser | null {
     return this.user();
   }
 
@@ -73,6 +75,14 @@ export class AuthService {
 
   public get getUserLogged():IAuthUser | null {
     return this.user();
+  }
+
+  public getUserAuthenticated():Observable<IAuthUser | boolean> {
+    if(!this.getAccessToken) return of(false);
+    return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/authenticated`, {headers: {'Authorization': 'Bearer ' + this.getAccessToken}})
+      .pipe(
+        tap(user => this.user.set(user)),
+      );
   }
 
 }

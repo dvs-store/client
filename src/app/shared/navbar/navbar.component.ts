@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class NavbarComponent {
 
-  protected authService = inject(AuthService);
+  protected authService:AuthService = inject(AuthService);
+
+  protected user = signal(this.authService.getUser);
   protected links = signal<INavLink[]>([
     {
       name: 'Home',
@@ -38,5 +40,17 @@ export class NavbarComponent {
       path: '/support'
     },
   ]);
+
+  constructor(){
+    effect(() => this.user.set(this.authService.user()));
+  }
+
+  protected logout(){
+    this.authService.logout();
+  }
+
+  protected login(){
+    this.authService.login();
+  }
 
 }

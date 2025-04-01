@@ -14,6 +14,7 @@ export const authConfig = ():AuthConfig => {
         showDebugInformation: true,
         dummyClientSecret: '12345',
         useHttpBasicAuth: true,
+        useSilentRefresh: true,
         strictDiscoveryDocumentValidation: false, //TODO: cambiar
         requireHttps: false, //TODO: cambiar
     }
