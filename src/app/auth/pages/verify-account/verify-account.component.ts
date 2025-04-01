@@ -15,7 +15,6 @@ export default class VerifyAccountComponent implements OnInit {
   private router = inject(ActivatedRoute);
   protected error = signal<string | null>('Token expired');
   private authService = inject(AuthService);
-  private navigate = inject(Router);
 
 
   ngOnInit(): void {

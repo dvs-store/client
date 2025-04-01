@@ -109,7 +109,10 @@ export default class RegisterPageComponent implements OnInit {
         finalize(() => this.isLoading.set(false)),
       )
       .subscribe({
-        error: (error) => this.signUpError.set(HandleErrorsFn(error)),
+        error: (error) => {
+          this.signUpError.set(HandleErrorsFn(error));
+          this.form.controls.password.reset();
+        },
         next: () => {
           this.form.reset();
           this.signUpError.set(null);

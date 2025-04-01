@@ -16,7 +16,7 @@ export class AuthService {
   private platformId = inject(PLATFORM_ID);
   private httpClient = inject(HttpClient)
   private isBrowser = isPlatformBrowser(this.platformId);
-  private SERVER_URL = signal<string>("http://localhost:8080/api");
+  private SERVER_URL = signal<string>("http://localhost:8080/api/users");
   private user = signal<IAuthUser | null>(null);
 
   constructor(){
@@ -52,14 +52,14 @@ export class AuthService {
   }
 
   public verifyAccount(token:string):Observable<IAuthUser>{
-    return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/users/verify/${token}`)
+    return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/verify/${token}`)
       .pipe(
         tap(usr => this.user.set(usr)),
       );
   }
 
   public createAccount(user:IRegisterUser):Observable<IAuthUser>{
-    return this.httpClient.post<IAuthUser>(`${this.SERVER_URL()}/users`, user)
+    return this.httpClient.post<IAuthUser>(`${this.SERVER_URL()}`, user)
       .pipe(
         tap(user => this.user.set(user)),
       );
