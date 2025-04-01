@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 export const routes: Routes = [
     {
