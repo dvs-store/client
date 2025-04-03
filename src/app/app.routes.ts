@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 export const routes: Routes = [
     {
@@ -14,18 +13,18 @@ export const routes: Routes = [
         path: 'google',
         loadComponent: () => import('./auth/pages/google-succes-login-page/google-succes-login-page.component'),
     },
-    {path: '', component: NavbarComponent, children: [
-        {
-            path: '',
-            loadComponent: () => import('./pages/home-page/home-page.component'),
-        },
-        {
-            path: 'user/profile',
-            loadComponent: () => import('./user-profile/profile-page/profile-page.component'),
-        },
-    ]},
+
+    {
+        path: '',
+        loadComponent: () => import('./pages/home-page/home-page.component'),
+    },
+    {
+        path: 'user/profile',
+        loadComponent: () => import('./user-profile/profile-page/profile-page.component'),
+    },
     {
         path: '**',
         redirectTo: ''
     }
 ];
+

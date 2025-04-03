@@ -9,7 +9,8 @@ import { provideOAuthClient } from 'angular-oauth2-oidc';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideOAuthClient()
   ]

@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/services/auth.service';
 import { finalize } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatProgressSpinnerModule],
+  imports: [RouterOutlet, MatProgressSpinnerModule, NavbarComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -21,9 +22,9 @@ export class AppComponent implements OnInit {
 
   private loadUser(){
     this.authService.getUserAuthenticated()
-      .subscribe({
-        error: () => this.authService.logout()
-      });
+    .subscribe({
+      error: () => this.authService.logout()
+    });
   }
 
 }

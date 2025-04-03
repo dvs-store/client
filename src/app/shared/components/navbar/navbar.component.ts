@@ -1,6 +1,6 @@
 import { Component, effect, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { INavLink } from '../../interfaces/navbar/INavLink';
 import { ProfileImageComponent } from "../profile-image/profile-image.component";
