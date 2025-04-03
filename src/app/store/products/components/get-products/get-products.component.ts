@@ -2,11 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { IProductPreview } from '../../interfaces/IProductPreview';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ProductComponent } from "../product/product.component";
 
 
 @Component({
   selector: 'get-products',
-  imports: [MatProgressSpinnerModule],
+  imports: [MatProgressSpinnerModule, ProductComponent],
   templateUrl: './get-products.component.html'
 })
 export class GetProductsComponent implements OnInit {

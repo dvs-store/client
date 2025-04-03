@@ -5,4 +5,5 @@ export enum IStatusProduct {
     ACTIVE,
     EARLY_ACCESS,
     MAINTENANCE,
+    ANTICIPATED,
 }

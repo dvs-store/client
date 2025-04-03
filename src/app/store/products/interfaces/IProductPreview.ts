@@ -10,4 +10,8 @@ export interface IProductPreview {
     image:string;
     status:IStatusProduct;
     isActive:Boolean;
+    createdAt:Date;
+    updatedAt:Date;
+    price:number;
+    stock:number;
 }

@@ -3,10 +3,11 @@
 @if (!products()) {
     <mat-spinner/>
 }@else {
-    <ul>
+    <section class="flex lg:max-w-7xl items-center max-lg:justify-center max-lg:mx-4 gap-4 mx-auto flex-wrap">
         @for (product of products(); track $index) {
-            <p> {{product.name}} </p>
+            <product [product]="product"/>
+            <product [product]="product"/>
         }
-    </ul>
+    </section>
 }
 

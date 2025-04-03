@@ -1,17 +1,17 @@
-<section [ngClass]="{'justify-center' : !isBrowser}" class="flex flex-row justify-between py-5 px-16">
+<section [ngClass]="{'justify-center' : !isBrowser}" class="flex flex-row justify-between py-3 px-16 bg-gray-50">
     @if (isBrowser) {
         <div>
             <h1
                 routerLink="/"
-                class="text-indigo-500 cursor-pointer font-bold md:text-2xl text-xl">DevComplete <span class="text-white">Studios</span>
+                class="text-blue-500 cursor-pointer font-bold md:text-xl text-xl">DevComplete Studios
             </h1>
         </div>
     
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-5 font-sans">
             @for (link of links(); track $index) {
                 <a
                     routerLinkActive="opacity-100"
-                    class="opacity-70"
+                    class="opacity-70 text-xs font-medium"
                     [routerLink]="link.path"
                     [title]="link.name"
                 >{{link.name}}</a>
@@ -19,10 +19,8 @@
         </div>
 
         @if (authService.user() != null) {
-            <button mat-button [matMenuTriggerFor]="menu">
-                <profile-image [imageUrl]="authService.user()?.avatar"/>
-            </button>
-    
+            <profile-image [matMenuTriggerFor]="menu" [imageUrl]="authService.user()?.avatar"/>
+
             <mat-menu #menu="matMenu">
                 <button mat-menu-item>Profile
                     <mat-icon fontIcon="person"/>
@@ -39,8 +37,14 @@
             </mat-menu>
         }@else {
             <div class="flex items-center gap-3">
-                <a (click)="login()" mat-flat-button>Login</a>
-                <button routerLink="/register" mat-raised-button>Create account</button>
+                <a
+                    class="px-2.5 py-1 bg-blue-500 hover:opacity-80 transition-all duration-200 rounded-xl text-xs cursor-pointer text-white font-medium"
+                    (click)="login()"
+                >Login</a>
+                <a
+                    class="px-2.5 py-1 outline-2 outline-gray-400 rounded-xl text-xs cursor-pointer text-blue-500 font-medium transition-colors duration-200 hover:bg-gray-200"
+                    routerLink="/register"
+                >Create account</a>
             </div>
         }
     }@else {
