@@ -28,7 +28,7 @@ export class AuthService {
   private config() {
     this.oauthService.configure(authConfig());
     this.oauthService.setStorage(localStorage);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(data => console.log(data));
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {});
   }
 
   login(){

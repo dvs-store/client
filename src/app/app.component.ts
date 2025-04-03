@@ -13,7 +13,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class AppComponent implements OnInit {
 
   private authService = inject(AuthService);
-  protected isLoading = signal(true);
 
 
   ngOnInit(): void {
@@ -22,17 +21,9 @@ export class AppComponent implements OnInit {
 
   private loadUser(){
     this.authService.getUserAuthenticated()
-    .pipe(
-      finalize(() => this.isLoading.set(false)),
-    )
-    .subscribe({
-      error: () => this.authService.logout(),
-      next: (user) => {
-        if( typeof user !== 'boolean' ){
-          console.log('Welcome: ' + user.email.substring(0, user.email.indexOf('@')));
-        }
-      },
-    });
+      .subscribe({
+        error: () => this.authService.logout()
+      });
   }
 
 }

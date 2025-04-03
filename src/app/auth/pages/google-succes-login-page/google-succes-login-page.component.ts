@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-google-succes-login-page',
@@ -10,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export default class GoogleSuccesLoginPageComponent implements OnInit {
 
   private authService = inject(AuthService);
+  private router = inject(Router);
 
 
   ngOnInit(): void {

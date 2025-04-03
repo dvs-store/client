@@ -15,7 +15,7 @@ import { NavbarSkeletonComponent } from "../navbar-skeleton/navbar-skeleton.comp
   imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass],
   templateUrl: './navbar.component.html'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   protected authService:AuthService = inject(AuthService);
   private platformId = inject(PLATFORM_ID);
@@ -42,14 +42,6 @@ export class NavbarComponent implements OnInit {
       path: '/support'
     },
   ]);
-
-  constructor(){
-    effect(() => console.log('User email: ' + this.authService.user()?.email));
-  }
-
-  ngOnInit(): void {
-    console.log(`User authenticated? ${this.authService.user() !== null}`);
-  }
 
   protected logout(){
     this.authService.logout();
