@@ -4,7 +4,7 @@
     <mat-spinner/>
 }@else {
     @if (products()!.length > 0 && !error()) {
-        <section class="flex xl:max-w-7xl items-center max-xl:justify-center max-xl:mx-4 gap-4 mx-auto flex-wrap">
+        <section class="flex xl:max-w-7xl items-center max-xl:justify-center max-xl:mx-4 gap-4 mt-24 mx-auto flex-wrap">
             @for (product of products(); track $index) {
                 <product [product]="product"/>
             }
