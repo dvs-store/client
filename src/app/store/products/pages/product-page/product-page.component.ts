@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Id } from '../../../../shared/interfaces/api/Id';
 import { ProductsService } from '../../services/products.service';
 import { HandleErrorsFn } from '../../../../shared/functions/HandleErrorsFn';
 import { IProduct } from '../../interfaces/IProduct';
