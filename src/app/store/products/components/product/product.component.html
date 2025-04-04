@@ -1,7 +1,7 @@
 <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 max-w-96 bg-white">
     <div class="relative group">
         <img
-            routerLink="/products/{{product().id}}"
+            routerLink="/products/{{product().name.toLowerCase().replaceAll(' ', '-')}}"
             class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
             [src]="product().image"
             alt="{{product().name}}"
@@ -34,10 +34,10 @@
     <div class="px-6 py-5">
         <div class="flex justify-between items-start mb-3">
             <h3 
-                routerLink="/products/{{product().id}}"
+                routerLink="/products/{{product().name.toLowerCase().replaceAll(' ', '-')}}"
                 class="text-lg font-medium leading-tight hover:text-gray-700 cursor-pointer transition-colors"
             >
-                {{product().name}}
+                {{product().name | titlecase}}
             </h3>
             <p class="text-base font-semibold">
                 {{product().price | currency}}

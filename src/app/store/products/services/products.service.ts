@@ -27,5 +27,10 @@ export class ProductsService {
     return this.clientHttp.get<IProduct>(`${this.url()}/${id}`);
   }
 
+  public findByName(name:string):Observable<IProduct>{
+    console.log(name);
+    return this.clientHttp.get<IProduct>(`${this.url()}/find-by-name/${name}`);
+  }
+
 
 }

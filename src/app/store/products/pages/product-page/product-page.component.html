@@ -28,7 +28,7 @@
 
             <div class="flex flex-col space-y-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{product()!.name}}</h1>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{product()!.name | titlecase}}</h1>
 
                     <div class="flex flex-wrap gap-2 mb-4">
                         @for (category of product()?.categories; track $index) {
@@ -139,24 +139,14 @@
                 <div class="max-w-3xl mx-auto">
                     <h3 class="text-2xl font-bold mb-6">Frequently Asked Questions</h3>
                     <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                        <mat-panel-title>How does licensing work?</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>Detailed information about the licensing model for this product.</p>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                        <mat-panel-title>Do you offer technical support?</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>Yes, we offer premium technical support for all our products. Support details are included in your purchase.</p>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                        <mat-panel-title>Can I request custom features?</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>Yes, we offer custom development services. Please contact our support team for more information.</p>
-                    </mat-expansion-panel>
+                        @for (question of questions(); track $index) {
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>{{question.title}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <p>{{question.content}}</p>
+                            </mat-expansion-panel>
+                        }
                     </mat-accordion>
                 </div>
                 </div>
