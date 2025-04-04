@@ -23,6 +23,10 @@ export const routes: Routes = [
         loadComponent: () => import('./user-profile/profile-page/profile-page.component'),
     },
     {
+        path: 'products/:id',
+        loadComponent: () => import('./store/products/pages/product-page/product-page.component'),
+    },
+    {
         path: '**',
         redirectTo: ''
     }

@@ -19,7 +19,6 @@ export class ProductComponent {
     console.log('Agregando al carrito el producto con el id: ' + this.product().id);
   }
 
-
   protected get isAccesAnticipated():boolean{
     return this.product().status === IStatusProduct.EARLY_ACCESS;
   }

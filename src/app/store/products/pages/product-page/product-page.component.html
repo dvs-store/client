@@ -1,0 +1,173 @@
+@if (product()) {
+    <div class="max-w-7xl mt-12 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="space-y-6">
+                <div class="relative rounded-xl overflow-hidden bg-white shadow-lg">
+                    <img [src]="product()!.image" [alt]="product()!.name" class="w-full h-96 object-cover object-center">
+
+                    <div class="absolute top-4 right-4 flex space-x-2">
+                    <span class="px-3 py-1 rounded-full text-xs font-medium shadow-md bg-emerald-500 text-white">
+                        {{product()!.status.toString().replace('_', '') | titlecase}}
+                    </span>
+
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-900 text-white shadow-md">
+                        {{product()!.stock}}
+                    </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-4">
+                    @for (image of product()!.images; track $index) {
+                    <div 
+                        class="rounded-lg overflow-hidden bg-white shadow-md cursor-pointer transform transition hover:shadow-lg hover:scale-105">
+                        <img [src]="image" [alt]="product()!.name" class="w-full h-24 object-cover">
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{product()!.name}}</h1>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        @for (category of product()?.categories; track $index) {
+                            <span
+                                class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                {{category.toString().replace('_', ' ') | titlecase}}
+                            </span>
+                        }
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <p class="text-3xl font-bold text-gray-900">{{product()!.price | currency}}</p>
+                        @if (product()?.status?.toString() === 'EARLY_ACCESS') {
+                            <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                Early Access Pricing
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            <div>
+                <h2 class="text-xl font-semibold text-gray-900 mb-3">Overview</h2>
+                <p class="text-gray-700 leading-relaxed">
+                {{product()!.description}}
+                </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Additional Information</h2>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Stock Status</p>
+                        <p class="font-medium">{{product()!.stock > 0 ? product()!.stock + ' units available' : 'Out of stock'}}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Status</p>
+                        <p class="font-medium">{{product()!.status.toString().replace('_', ' ') | titlecase}}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Created</p>
+                        <p class="font-medium">{{product()!.createdAt | date:'mediumDate'}}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Last Updated</p>
+                        <p class="font-medium">{{product()!.updatedAt | date:'mediumDate'}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                @if (product()!.isActive) {
+                    <button [disabled]="product()!.stock <= 0 || !product()!.isActive"
+                        class="w-full px-6 py-4 bg-black text-white text-base font-semibold rounded-lg shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transition-colors">
+                        Add to Cart
+                    </button>
+                }
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        Wishlist
+                    </button>
+                    <button class="flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        Share
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="mt-24">
+            <mat-tab-group animationDuration="300ms" mat-align-tabs="center" class="product-tabs">
+            <mat-tab label="Details">
+                <div class="py-12 px-4">
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6">Product Details</h3>
+                    <div class="prose prose-lg max-w-none">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod, nisl vel tincidunt maximus, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel tincidunt maximus, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.</p>
+                    <ul>
+                        <li>Feature one with detailed explanation</li>
+                        <li>Another amazing feature of this product</li>
+                        <li>Technical specifications and capabilities</li>
+                        <li>Integration possibilities with other systems</li>
+                        <li>Support and maintenance information</li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Reviews">
+                <div class="py-12 px-4">
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6">Customer Reviews</h3>
+                    <p class="text-center text-gray-500 py-12">No reviews yet. Be the first to review this product.</p>
+                </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="FAQ">
+                <div class="py-12 px-4">
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6">Frequently Asked Questions</h3>
+                    <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                        <mat-panel-title>How does licensing work?</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Detailed information about the licensing model for this product.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                        <mat-panel-title>Do you offer technical support?</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Yes, we offer premium technical support for all our products. Support details are included in your purchase.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                        <mat-panel-title>Can I request custom features?</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Yes, we offer custom development services. Please contact our support team for more information.</p>
+                    </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                </div>
+            </mat-tab>
+            </mat-tab-group>
+        </div>
+
+        <div class="mt-24">
+            <h2 class="text-2xl font-bold text-center mb-12">Related Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            </div>
+        </div>
+    </div>
+}
