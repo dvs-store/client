@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./store/products/pages/product-page/product-page.component'),
     },
     {
+        path: 'admin/products',
+        loadComponent: () => import('./store/admin/pages/products/products.component'),
+    },
+    {
         path: '**',
         redirectTo: ''
     }

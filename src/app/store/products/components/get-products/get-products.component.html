@@ -10,9 +10,13 @@
             }
         </section>
     }@else if(error()){
-        <alert message="Error, please reload the page, our support team has already been notified." type="ERROR"/>
+        <div class="mt-24">
+            <alert message="Error, please reload the page, our support team has already been notified." type="ERROR"/>
+        </div>
     }@else {
-        <alert message="There are currently no products." type="WARNING"/>
+        <div class="mt-24">
+            <alert message="There are currently no products." type="WARNING"/>
+        </div>
     }
 }
 
