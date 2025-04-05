@@ -9,10 +9,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { Meta, Title } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
 import { IFaq } from '../../interfaces/IFaq';
+import { AlertComponent } from "../../../../shared/components/alert/alert.component";
+import { ProductSkeletonComponent } from "../../components/product-skeleton/product-skeleton.component";
 
 @Component({
   selector: 'product-page',
-  imports: [TitleCasePipe, CurrencyPipe, DatePipe, MatTabsModule, MatExpansionModule],
+  imports: [TitleCasePipe, CurrencyPipe, DatePipe, MatTabsModule, MatExpansionModule, AlertComponent, ProductSkeletonComponent],
   templateUrl: './product-page.component.html'
 })
 export default class ProductPageComponent implements OnInit {
@@ -40,7 +42,7 @@ export default class ProductPageComponent implements OnInit {
       content: 'The consumer is responsible for what they buy and what they use, we are not responsible in case they misuse our scripts, if the user is banned we are not responsible.',
       title: 'Is there a risk of in-game banning?',
     }
-  ])
+  ]);
 
 
   ngOnInit(): void {

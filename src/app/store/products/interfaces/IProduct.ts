@@ -1,3 +1,4 @@
+import { Id } from "../../../shared/interfaces/api/Id";
 import { ICategory } from "./ICategory";
 import { IStatusProduct } from "./IStatusProduct";
 
@@ -14,5 +15,6 @@ export interface IProduct {
     categories:ICategory[];
     status:IStatusProduct;
     isActive:Boolean;
+    id:Id;
 }
 
