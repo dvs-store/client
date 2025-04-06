@@ -5,7 +5,7 @@
     [src]="uploadImage() || defaultImage()"
     alt="Upload image"
   >
-  <button [disabled]="!uploadImage()" (click)="onReset()">
+  <button type="button" [disabled]="!uploadImage()" (click)="onReset()">
     <mat-icon class="absolute top-0 disabled:opacity-50 cursor-pointer right-0 hover:bg-gray-400 transition-all duration-200 rounded-full" fontIcon="delete_forever"/>
   </button>
   <input (change)="onUploadImage($event)" #inputImage class="hidden" type="file">

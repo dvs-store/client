@@ -1,9 +1,8 @@
-
-export enum ICategory {
-    WEB_DEVELOPER,
-    GAME_DEVELOPER,
-    ROBLOX,
-    DRAGON_BLOX_ULTIMATE,
-    SCRIPTS,
-    API,
-}
+export type ICategory = 
+  'WEB_DEVELOPER' | 
+  'GAME_DEVELOPER' | 
+  'ROBLOX' | 
+  'SCRIPTS' | 
+  'API' | 
+  'AI' | 
+  'ROBLOX_SCRIPTS';

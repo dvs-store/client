@@ -21,7 +21,7 @@ export class ProductComponent {
   }
 
   protected get isAccesAnticipated():boolean{
-    return this.product().status === IStatusProduct.EARLY_ACCESS;
+    return this.product().status === 'EARLY_ACCESS';
   }
 
   protected get isNewProduct():boolean {

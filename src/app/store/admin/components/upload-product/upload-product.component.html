@@ -3,7 +3,7 @@
 <section class="md:max-w-5xl md:mx-auto mx-4 mt-24 rounded-lg bg-gray-100 px-5 py-6">
     <h2 class="text-center text-xl font-semibold">Create new product</h2>
 
-    <form [formGroup]="form" class="w-full mt-12">
+    <form (submit)="onUploadProduct()" [formGroup]="form" class="w-full mt-12">
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>
         <input type="text" matInput formControlName="name" placeholder="Ex. iPhone 2020">
@@ -11,7 +11,7 @@
 
       <mat-form-field class="w-full">
         <mat-label>Description</mat-label>
-        <input type="text" matInput formControlName="description" placeholder="Ex. is the best phone">
+        <textarea matInput placeholder="Ex. Is the best product..."></textarea>
       </mat-form-field>
 
       <mat-form-field class="w-full">
@@ -24,7 +24,41 @@
         <input type="number" matInput formControlName="price" placeholder="999">
       </mat-form-field>
 
-      <upload-image/>
+      <mat-form-field class="w-full">
+        <mat-label>Youtube Link</mat-label>
+        <input type="text" matInput formControlName="youtubeLink" placeholder="Ex. https://...">
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Discord Link</mat-label>
+        <input type="text" matInput formControlName="discordLink" placeholder="Ex. https://...">
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Script Link</mat-label>
+        <input type="text" matInput formControlName="scriptLink" placeholder="Ex. https://...">
+      </mat-form-field>
+
+      <upload-image (onChangeImage)="onChangeImage($event)"/>
+
+      <div class="flex flex-col justify-center my-4 gap-2 items-center">
+        <h3>Images</h3>
+        <input
+          (change)="onUploadFile($event)"
+          class="px-2 py-1 rounded-lg my-2 bg-indigo-400 hover:bg-indigo-500 transition-colors ease-in-out duration-200 text-white font-medium"
+          type="file"
+        >
+
+        <div class="flex flex-col gap-2 items-center">
+          @for (file of form.controls.images.value; track $index) {
+            <p>Image {{$index}}</p>
+          }
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-12">
+        <button type="submit" [disabled]="form.invalid" mat-flat-button>Upload</button>
+      </div>
     </form>
 </section>
 

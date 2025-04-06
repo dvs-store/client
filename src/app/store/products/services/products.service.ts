@@ -4,6 +4,7 @@ import { IProductPreview } from '../interfaces/IProductPreview';
 import { Observable, of, tap } from 'rxjs';
 import { Id } from '../../../shared/interfaces/api/Id';
 import { IProduct } from '../interfaces/IProduct';
+import { ICreateProduct } from '../interfaces/ICreateProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,26 @@ export class ProductsService {
       .pipe(
         tap(p => this.productsByName.set(p.name, p)),
       );
+  }
+
+  public addProduct(dto:ICreateProduct):Observable<boolean>{
+    const body = new FormData();
+    body.append('image', dto.image);
+    body.append('name', dto.name);
+    body.append('price', dto.price.toString());
+    body.append('stock', dto.stock.toString());
+
+    dto.images.forEach(image => {
+      body.append('images', image);
+    });
+
+    dto.catgories.forEach(c => {
+      body.append('categories', c);
+    });
+
+    body.append('status', dto.status);
+
+    return this.clientHttp.post<boolean>(this.url(), body);
   }
 
 

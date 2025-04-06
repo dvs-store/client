@@ -1,9 +1,3 @@
 
 
-export enum IStatusProduct {
-    DEVELOPMENT,
-    ACTIVE,
-    EARLY_ACCESS,
-    MAINTENANCE,
-    ANTICIPATED,
-}
+export type IStatusProduct = 'DEVELOPMENT' | 'DEVELOPMENT' | 'ACTIVE' | 'EARLY_ACCESS' | 'MAINTENANCE' | 'ANTICIPATED';

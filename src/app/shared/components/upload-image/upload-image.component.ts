@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, input, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -14,6 +14,9 @@ export class UploadImageComponent {
   @ViewChild('inputImage') input!:ElementRef<HTMLInputElement>;
   private file = signal<File | null>(null);
   protected uploadImage = signal<string | null>(null);
+
+  @Output()
+  public onChangeImage = new EventEmitter<{file:File, base64: string} | null>();
 
 
   protected onClick(){
@@ -34,6 +37,8 @@ export class UploadImageComponent {
   private decodeBase64(file:File){
     const reader = new FileReader();
     reader.onload = () => this.uploadImage.set(reader.result as string);
+    this.onChangeImage.emit({file, base64: reader.result as string});
+
     reader.readAsDataURL(file);
   }
 
