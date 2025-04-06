@@ -7,39 +7,47 @@
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>
         <input type="text" matInput formControlName="name" placeholder="Ex. iPhone 2020">
+        <mat-error> {{errors.name()}} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Ex. Is the best product..."></textarea>
+        <textarea formControlName="description" matInput placeholder="Ex. Is the best product..."></textarea>
+        <mat-error> {{errors.description()}} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Stock</mat-label>
         <input type="number" matInput formControlName="stock" placeholder="999">
+        <mat-error> {{errors.stock()}} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Price</mat-label>
         <input type="number" matInput formControlName="price" placeholder="999">
+        <mat-error> {{errors.price()}} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Youtube Link</mat-label>
         <input type="text" matInput formControlName="youtubeLink" placeholder="Ex. https://...">
+        <mat-error> {{errors.youtubeLink()}} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Discord Link</mat-label>
         <input type="text" matInput formControlName="discordLink" placeholder="Ex. https://...">
+        <mat-error> {{errors.discordLink()}} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Script Link</mat-label>
         <input type="text" matInput formControlName="scriptLink" placeholder="Ex. https://...">
+        <mat-error> {{errors.scriptLink()}} </mat-error>
       </mat-form-field>
 
       <upload-image (onChangeImage)="onChangeImage($event)"/>
+      <mat-error> {{errors.image()}} </mat-error>
 
       <div class="flex flex-col justify-center my-4 gap-2 items-center">
         <h3>Images</h3>

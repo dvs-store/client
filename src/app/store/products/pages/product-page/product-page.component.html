@@ -81,9 +81,21 @@
                 </div>
 
                 <div class="flex gap-5 items-center mt-6 mb-2">
-                    <img width="24px" height="24px" class="w-6 h-6" src="/icons/discord.svg" alt="Discord Icon">
-                    <img width="24px" height="24px" class="w-6 h-6" src="/icons/youtube.svg" alt="Youtube Icon">
-                    <img width="24px" height="24px" class="w-6 h-6" src="/icons/copy.svg" alt="Youtube Icon">
+                    @if (product()?.discordLink) {
+                        <a target="_blank" [href]="product()!.discordLink">
+                            <img width="24px" height="24px" class="w-6 h-6" src="/icons/discord.svg" alt="Discord Icon">
+                        </a>
+                    }
+                    @if (product()?.youtubeLink) {
+                        <a target="_blank" [href]="product()!.youtubeLink">
+                            <img width="24px" height="24px" class="w-6 h-6" src="/icons/youtube.svg" alt="Youtube Icon">
+                        </a>
+                    }
+                    @if (product()?.scriptLink) {
+                        <a target="_blank" [href]="product()!.scriptLink">
+                            <img width="24px" height="24px" class="w-6 h-6" src="/icons/copy.svg" alt="Youtube Icon">
+                        </a>
+                    }
                 </div>
             </div>
 

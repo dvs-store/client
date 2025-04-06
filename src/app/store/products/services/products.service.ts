@@ -55,6 +55,16 @@ export class ProductsService {
     body.append('price', dto.price.toString());
     body.append('stock', dto.stock.toString());
 
+    if( dto.scriptLink ){
+      body.append('scriptLink', dto.scriptLink);
+    }
+    if( dto.youtubeLink ){
+      body.append('youtubeLink', dto.youtubeLink);
+    }
+    if( dto.discordLink ){
+      body.append('discordLink', dto.discordLink);
+    }
+
     dto.images.forEach(image => {
       body.append('images', image);
     });
