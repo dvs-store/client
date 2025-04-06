@@ -1,0 +1,12 @@
+<div class="max-w-44 mx-auto relative my-4 cursor-pointer outline-4 rounded-md outline-gray-400 hover:outline-gray-500 transition-all duration-200">
+  <img
+    (click)="onClick()"
+    class="h-44 w-44 object-cover"
+    [src]="uploadImage() || defaultImage()"
+    alt="Upload image"
+  >
+  <button [disabled]="!uploadImage()" (click)="onReset()">
+    <mat-icon class="absolute top-0 disabled:opacity-50 cursor-pointer right-0 hover:bg-gray-400 transition-all duration-200 rounded-full" fontIcon="delete_forever"/>
+  </button>
+  <input (change)="onUploadImage($event)" #inputImage class="hidden" type="file">
+</div>

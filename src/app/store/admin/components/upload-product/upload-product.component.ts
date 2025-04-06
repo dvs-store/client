@@ -5,10 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { IStatusProduct } from '../../../products/interfaces/IStatusProduct';
 import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UploadImageComponent } from "../../../../shared/components/upload-image/upload-image.component";
 
 @Component({
   selector: 'upload-product',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, UploadImageComponent],
   templateUrl: './upload-product.component.html'
 })
 export class UploadProductComponent {
