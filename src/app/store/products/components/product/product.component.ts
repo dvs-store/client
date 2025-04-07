@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { IProductPreview } from '../../interfaces/IProductPreview';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { IStatusProduct } from '../../interfaces/IStatusProduct';
+import { ShoppService } from '../../../shopp/services/shopp.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'product',
@@ -14,10 +15,22 @@ import { IStatusProduct } from '../../interfaces/IStatusProduct';
 export class ProductComponent {
 
   public product = input.required<IProductPreview>();
+  private shoppService = inject(ShoppService);
+  protected isLoadingAddProduct = signal(false);
 
 
   protected addCart(){
-    console.log('Agregando al carrito el producto con el id: ' + this.product().id);
+    if( !this.product() || this.isLoadingAddProduct() ) return;
+    this.isLoadingAddProduct.set(true);
+
+    this.shoppService.addProduct(this.product().id as string)
+      .pipe(
+        finalize(() => this.isLoadingAddProduct.set(false)),
+      )
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (e) => console.log(e),
+      });
   }
 
   protected get isAccesAnticipated():boolean{

@@ -5,7 +5,6 @@ import { AuthService } from '../services/auth.service';
 export const checkAdminGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
   const user = auth.getUser;
-  console.log(user);
 
   if( !user ) return false;
   const roles = user.roles;

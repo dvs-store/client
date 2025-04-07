@@ -14,7 +14,6 @@ export function HandleExpectedErrors(control: FormControl):string | null {
     return `Must be less than: ${length} characters`;
   }
 
-  console.log(errors);
   return 'Unexpected error!.';
 }
 

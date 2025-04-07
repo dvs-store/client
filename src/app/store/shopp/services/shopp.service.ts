@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { IShoppCartDto } from '../interfaces/IShoppCartDto';
 
 @Injectable({
@@ -14,6 +14,14 @@ export class ShoppService {
 
   public getShoppCart():Observable<IShoppCartDto>{
     return this.httpClient.get<IShoppCartDto>(this.url());
+  }
+
+  public addProduct(productId:string):Observable<Boolean>{
+    return this.httpClient.post<Boolean>(`${this.url()}/${productId}`, {});
+  }
+
+  public deleteQuantityProduct(productId:string):Observable<Boolean> {
+    return this.httpClient.delete<Boolean>(`${this.url()}/${productId}`, {});
   }
 
 }

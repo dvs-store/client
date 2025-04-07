@@ -53,7 +53,7 @@
                 {{product().stock}} Stock
             </div>
 
-            <button (click)="addCart()" mat-icon-button>
+            <button [disabled]="isLoadingAddProduct()" (click)="addCart()" mat-icon-button>
                 <mat-icon fontIcon="shopping_cart"/>
             </button>
         </div>

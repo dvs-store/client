@@ -1,9 +1,10 @@
-import { IProductPreview } from "../../products/interfaces/IProductPreview";
+import { IShoppProductDto } from "./IShoppProductDto";
 
 
 export interface IShoppCartDto {
-    products:IProductPreview[];
+    products:IShoppProductDto[];
     userId:string;
     id:string;
+    total:number;
 }
 

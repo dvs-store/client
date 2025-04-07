@@ -61,7 +61,6 @@ export class UploadProductComponent {
 
     keys.forEach(k => {
       const error = HandleExpectedErrors(controls[k]);
-      console.log(error);
       this.errors[k].set(error);
     });
   }
@@ -86,11 +85,8 @@ export class UploadProductComponent {
       catgories: ['API', 'GAME_DEVELOPER', 'ROBLOX', 'SCRIPTS'],
     })
       .subscribe({
-        error: (error) => console.log(error),
-        next: data => {
-          console.log('Producto creado');
-          this.form.reset();
-        }
+        error: (error) => {}, //TODO: manejar el error
+        next: () => this.form.reset(),
       });
   }
 

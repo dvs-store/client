@@ -54,6 +54,7 @@ export class ProductsService {
     body.append('name', dto.name);
     body.append('price', dto.price.toString());
     body.append('stock', dto.stock.toString());
+    body.append('description', dto.description);
 
     if( dto.scriptLink ){
       body.append('scriptLink', dto.scriptLink);
