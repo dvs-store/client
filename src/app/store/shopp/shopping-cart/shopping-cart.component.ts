@@ -35,7 +35,7 @@ export default class ShoppingCartComponent implements OnInit {
       .pipe(
         finalize(() => this.isLoading.set(false)),
       )
-      .subscribe((data) => console.log(data)); //TODO: agregar el nuevo carrito de compras
+      .subscribe((data) => this.cart.set(data));
   }
 
   protected addOneProduct(id:string){
@@ -44,7 +44,7 @@ export default class ShoppingCartComponent implements OnInit {
       .pipe(
         finalize(() => this.isLoading.set(false)),
       )
-      .subscribe((data) => console.log(data)); //TODO: agregar el nuevo carrito de compras
+      .subscribe((data) => this.cart.set(data));
   }
 
 }

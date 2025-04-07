@@ -16,12 +16,12 @@ export class ShoppService {
     return this.httpClient.get<IShoppCartDto>(this.url());
   }
 
-  public addProduct(productId:string):Observable<Boolean>{
-    return this.httpClient.post<Boolean>(`${this.url()}/${productId}`, {});
+  public addProduct(productId:string):Observable<IShoppCartDto>{
+    return this.httpClient.post<IShoppCartDto>(`${this.url()}/${productId}`, {});
   }
 
-  public deleteQuantityProduct(productId:string):Observable<Boolean> {
-    return this.httpClient.delete<Boolean>(`${this.url()}/${productId}`, {});
+  public deleteQuantityProduct(productId:string):Observable<IShoppCartDto> {
+    return this.httpClient.delete<IShoppCartDto>(`${this.url()}/${productId}`, {});
   }
 
 }
