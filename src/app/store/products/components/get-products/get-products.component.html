@@ -1,22 +1,15 @@
-
-
-@if (!products()) {
-    <mat-spinner/>
+@if (products() && products()!.length > 0 && !error()) {
+    <section class="flex xl:max-w-7xl items-center max-xl:justify-center max-xl:mx-4 gap-4 mt-24 mx-auto flex-wrap">
+        @for (product of products(); track $index) {
+            <product [product]="product"/>
+        }
+    </section>
+}@else if(error()){
+    <div class="mt-24">
+        <alert message="Error, please reload the page, our support team has already been notified." type="ERROR"/>
+    </div>
 }@else {
-    @if (products()!.length > 0 && !error()) {
-        <section class="flex xl:max-w-7xl items-center max-xl:justify-center max-xl:mx-4 gap-4 mt-24 mx-auto flex-wrap">
-            @for (product of products(); track $index) {
-                <product [product]="product"/>
-            }
-        </section>
-    }@else if(error()){
-        <div class="mt-24">
-            <alert message="Error, please reload the page, our support team has already been notified." type="ERROR"/>
-        </div>
-    }@else {
-        <div class="mt-24">
-            <alert message="There are currently no products." type="WARNING"/>
-        </div>
-    }
+    <div class="mt-24">
+        <alert message="There are currently no products." type="WARNING"/>
+    </div>
 }
-

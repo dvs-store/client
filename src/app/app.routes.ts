@@ -25,6 +25,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home-page/home-page.component'),
     },
     {
+        path: 'shopp/cart',
+        loadComponent: () => import('./store/shopp/shopping-cart/shopping-cart.component'),
+    },
+    {
         path: 'user/profile',
         canActivate: [isLogged],
         loadComponent: () => import('./user-profile/profile-page/profile-page.component'),
