@@ -9,13 +9,25 @@
             </div>
 
             <hr class="text-gray-400 mt-4">
+            <div class="flex md:flex-row flex-col gap-3 items-center mt-3">
+                <p class="text-xs font-medium">Send gift to</p>
+                <input
+                    class="bg-white md:w-1/2 w-full rounded-xl shadow-md outline-1 focus:outline-2 outline-blue-500 px-2 py-0.5"
+                    type="text"
+                    placeholder="Ex. friend@correo.com"
+                >
+            </div>
+
             <div class="pt-3 px-1 flex items-center justify-between">
                 <span class="text-lg font-medium">Total</span>
                 <span class="text-xl font-bold">{{cart()!.total | currency}}</span>
             </div>
-            <div class="mt-6">
-                <button class="w-full py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors font-medium">
-                    Proceed to pay
+            <div class="mt-6 flex md:flex-row flex-col gap-2 pt-2">
+                <button class="w-full py-1.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors font-medium">
+                    Paypal
+                </button>
+                <button class="w-full py-1.5 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors font-medium">
+                    Stripe
                 </button>
             </div>
         } @else {
