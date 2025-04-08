@@ -8,16 +8,19 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { NavbarSkeletonComponent } from "../navbar-skeleton/navbar-skeleton.component";
+import { ShoppService } from '../../../store/shopp/services/shopp.service';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @Component({
   selector: 'navbar',
-  imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass],
+  imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass, MatBadgeModule],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 
   protected authService:AuthService = inject(AuthService);
+  protected shoppService:ShoppService = inject(ShoppService);
   private platformId = inject(PLATFORM_ID);
   protected isBrowser = isPlatformBrowser(this.platformId);
   protected links = signal<INavLink[]>([
