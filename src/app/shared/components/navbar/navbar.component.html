@@ -22,8 +22,12 @@
         </div>
 
         @if (authService.user() != null) {
-            <a routerLink="/shopp/cart">Store</a>
-            <profile-image [matMenuTriggerFor]="menu" [imageUrl]="authService.user()?.avatar"/>
+            <div class="flex gap-5 items-center">
+                <button routerLink="/shopp/cart" mat-icon-button>
+                    <mat-icon fontIcon="shopping_cart"/>
+                </button>
+                <profile-image [matMenuTriggerFor]="menu" [imageUrl]="authService.user()?.avatar"/>
+            </div>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item>Profile
                     <mat-icon fontIcon="person"/>

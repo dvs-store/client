@@ -6,11 +6,11 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
-import { finalize } from 'rxjs';
+import { ProductCartComponent } from "../components/product-cart/product-cart.component";
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [RouterLink, MatButtonModule, MatIconModule, CurrencyPipe],
+  imports: [RouterLink, MatButtonModule, MatIconModule, CurrencyPipe, ProductCartComponent],
   templateUrl: './shopping-cart.component.html'
 })
 export default class ShoppingCartComponent implements OnInit {
@@ -29,22 +29,8 @@ export default class ShoppingCartComponent implements OnInit {
       })
   }
 
-  protected removeOneProduct(id:string){
-    this.isLoading.set(true);
-    this.shoppService.deleteQuantityProduct(id)
-      .pipe(
-        finalize(() => this.isLoading.set(false)),
-      )
-      .subscribe((data) => this.cart.set(data));
-  }
-
-  protected addOneProduct(id:string){
-    this.isLoading.set(true);
-    this.shoppService.addProduct(id)
-      .pipe(
-        finalize(() => this.isLoading.set(false)),
-      )
-      .subscribe((data) => this.cart.set(data));
+  protected onChangeCart(data:IShoppCartDto){
+    this.cart.set(data);
   }
 
 }
