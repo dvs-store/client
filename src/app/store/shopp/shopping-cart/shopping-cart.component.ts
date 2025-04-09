@@ -5,12 +5,12 @@ import { HandleErrorsFn } from '../../../shared/functions/HandleErrorsFn';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
 import { ProductCartComponent } from "../components/product-cart/product-cart.component";
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [RouterLink, MatButtonModule, MatIconModule, CurrencyPipe, ProductCartComponent],
+  imports: [RouterLink, MatButtonModule, MatIconModule, CurrencyPipe, ProductCartComponent, NgClass],
   templateUrl: './shopping-cart.component.html'
 })
 export default class ShoppingCartComponent implements OnInit {

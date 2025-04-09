@@ -20,8 +20,17 @@
 
             <div class="pt-3 px-1 flex items-center justify-between">
                 <span class="text-lg font-medium">Total</span>
-                <span class="text-xl font-bold">{{cart()!.total | currency}}</span>
+
+                <div class="flex gap-2 items-center">
+                    @if (cart()!.totalDiscount && cart()!.totalDiscount! > 0) {
+                        <p class="text-xl font-bold"> {{(cart()!.total - cart()!.totalDiscount!) | currency }} </p>
+                    }
+                    <span [ngClass]="{'line-through text-xs': cart()!.totalDiscount! > 0}" class="text-xl font-bold">{{cart()!.total | currency}}</span>
+                </div>
             </div>
+
+            <p class="text-blue-500 text-xs ml-4 mt-1">Every purchase over $30 gets you an 8% discount.</p>
+
             <div class="mt-6 flex md:flex-row flex-col gap-2 pt-2">
                 <button class="w-full py-1.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors font-medium">
                     Paypal
