@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { IProductPreview } from '../interfaces/IProductPreview';
 import { Observable, of, tap } from 'rxjs';
 import { Id } from '../../../shared/interfaces/api/Id';
 import { IProduct } from '../interfaces/IProduct';
 import { ICreateProduct } from '../interfaces/ICreateProduct';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ProductsService {
   private productsByName:Map<string, IProduct> = new Map();
   private productsById = signal<Map<string, IProduct>>(new Map());
   private url = signal('http://localhost:8080/api/products');
+  private authService = inject(AuthService);
 
   constructor(
     private clientHttp:HttpClient,
@@ -49,6 +51,8 @@ export class ProductsService {
   }
 
   public addProduct(dto:ICreateProduct):Observable<boolean>{
+    if( !this.authService.isAuthenticated ) return of(false);
+
     const body = new FormData();
     body.append('image', dto.image);
     body.append('name', dto.name);
@@ -75,8 +79,8 @@ export class ProductsService {
     });
 
     body.append('status', dto.status);
-
-    return this.clientHttp.post<boolean>(this.url(), body);
+    const headers = this.authService.getHeaderBearerToken;
+    return this.clientHttp.post<boolean>(this.url(), body, {headers});
   }
 
 

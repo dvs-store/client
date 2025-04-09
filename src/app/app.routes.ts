@@ -26,6 +26,7 @@ export const routes: Routes = [
     },
     {
         path: 'shopp/cart',
+        canActivate: [isLogged],
         loadComponent: () => import('./store/shopp/shopping-cart/shopping-cart.component'),
     },
     {

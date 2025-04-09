@@ -4,7 +4,7 @@ import { authConfig } from '../helpers/AuthConfig';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, of, tap } from 'rxjs';
 import { IAuthUser } from '../interfaces/IAuthUser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IRegisterUser } from '../interfaces/IRegisterUser';
 
 @Injectable({
@@ -77,9 +77,15 @@ export class AuthService {
     return this.user();
   }
 
+  public get getHeaderBearerToken():HttpHeaders{
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.getAccessToken}`,
+    });
+  }
+
   public getUserAuthenticated():Observable<IAuthUser | boolean> {
     if(!this.getAccessToken) return of(false);
-    return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/authenticated`, {headers: {'Authorization': 'Bearer ' + this.getAccessToken}})
+    return this.httpClient.get<IAuthUser>(`${this.SERVER_URL()}/authenticated`, {headers: this.getHeaderBearerToken})
       .pipe(
         tap(user => this.user.set(user)),
       );

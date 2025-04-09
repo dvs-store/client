@@ -4,4 +4,5 @@ export interface IShoppProductDto {
     quantity:number;
     amount:number;
     product:IProductPreview;
+    discount?:number;
 }
