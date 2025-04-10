@@ -9,7 +9,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 })
 export class ShoppService {
 
-  private url = signal<string>('http://localhost:8080/api/shopp');
+  private url = signal<string>('http://localhost:8090/api/shopp');
   private httpClient = inject(HttpClient);
   public cart = signal<IShoppCartDto | null>(null);
   private authService:AuthService = inject(AuthService);
@@ -40,6 +40,19 @@ export class ShoppService {
     return this.httpClient.delete<IShoppCartDto>(`${this.url()}/${productId}`, {headers})
       .pipe(
         tap(data => this.cart.set(data)),
+      );
+  }
+
+  public clearShoppCart(){
+    const headers = this.authService.getHeaderBearerToken;
+
+    return this.httpClient.delete<boolean>(`${this.url()}`, {headers})
+      .pipe(
+        tap(value => {
+          if( value ){
+            this.cart.set(null);
+          };
+        }),
       );
   }
 

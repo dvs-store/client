@@ -15,7 +15,7 @@ export class ProductsService {
   private products = signal<IProductPreview[] | null>(null);
   private productsByName:Map<string, IProduct> = new Map();
   private productsById = signal<Map<string, IProduct>>(new Map());
-  private url = signal('http://localhost:8080/api/products');
+  private url = signal('http://localhost:8090/api/products');
   private authService = inject(AuthService);
 
   constructor(

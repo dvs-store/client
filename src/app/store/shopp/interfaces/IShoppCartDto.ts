@@ -6,6 +6,7 @@ export interface IShoppCartDto {
     userId:string;
     id:string;
     total:number;
-    totalDiscount?:number
+    totalDiscount?:number;
+    originalPrice?:number;
 }
 

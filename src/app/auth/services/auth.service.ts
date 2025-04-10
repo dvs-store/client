@@ -16,7 +16,7 @@ export class AuthService {
   private platformId = inject(PLATFORM_ID);
   private httpClient = inject(HttpClient)
   private isBrowser = isPlatformBrowser(this.platformId);
-  private SERVER_URL = signal<string>("http://localhost:8080/api/users");
+  private SERVER_URL = signal<string>("http://localhost:8090/api/users");
   public user = signal<IAuthUser | null>(null);
 
   constructor(){
@@ -32,8 +32,11 @@ export class AuthService {
   }
 
   login(){
-    if( this.isAuthenticated ) return;
     this.oauthService.initLoginFlow();
+  }
+
+  refreshToken(){
+    return this.oauthService.refreshToken();
   }
 
   logout() {

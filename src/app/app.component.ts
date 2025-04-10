@@ -24,7 +24,14 @@ export class AppComponent implements OnInit {
 
   private loadData(){
     merge(this.authService.getUserAuthenticated(), this.shoppService.getShoppCart())
-      .subscribe((data) => console.log(data));
+      .subscribe({
+        error: (e) => {
+          if(e.status === 401){
+            this.authService.logout();
+          }
+        },
+        next: (data) => console.log(data),
+      });
   }
 
 }
