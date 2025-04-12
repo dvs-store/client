@@ -12,13 +12,13 @@ import { AuthService } from '../../auth/services/auth.service';
 export class PaymentsService {
 
   private httpClient = inject(HttpClient);
-  private url = signal<string>("http://localhost:8090/api/payments");
+  private url = signal<string>("http://localhost:8090/api/shopp");
   private authService = inject(AuthService);
 
 
   public onGetLinkPay(dto:IPaymentGift):Observable<{url:string}>{
     const headers = this.authService.getHeaderBearerToken;
-    return this.httpClient.post<{url:string}>(`${this.url()}/one-payment`, {dto}, {headers});
+    return this.httpClient.post<{url:string}>(`${this.url()}/buy`, {dto}, {headers});
   }
 
 }
