@@ -29,7 +29,7 @@
                 <profile-image [matMenuTriggerFor]="menu" [imageUrl]="authService.user()?.avatar"/>
             </div>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>Profile
+                <button routerLink="/user/profile" mat-menu-item>Profile
                     <mat-icon fontIcon="person"/>
                 </button>
                 <button mat-menu-item>Support

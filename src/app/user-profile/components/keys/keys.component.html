@@ -1,0 +1,10 @@
+
+
+@if (!keys()) {
+    <mat-spinner/>
+}@else {
+    @for (key of keys(); track $index) {
+        <key-details [key]="key"/>
+    }
+}
+
