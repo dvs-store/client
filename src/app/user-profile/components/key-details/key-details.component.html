@@ -1,6 +1,84 @@
-
-
-<div>
-    <h2> {{key().key}} </h2>
+<div class="premium-key-card relative overflow-hidden bg-gradient-to-r from-white to-gray-50 rounded-xl shadow-lg p-6 my-4 border border-gray-200 transition-all hover:shadow-indigo-200 hover:shadow-xl">
+  <!-- Efecto de brillo en la esquina superior -->
+  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-indigo-200 to-transparent opacity-40 rounded-bl-full"></div>
+  
+  <!-- Cabecera con detalles del producto -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 relative">
+    <div class="flex items-center">
+      @if (key().product?.image) {
+        <div class="mr-4 flex-shrink-0">
+          <div class="h-14 w-14 rounded-lg overflow-hidden bg-white p-0.5 border border-gray-200 shadow-md">
+            <img [src]="key().product?.image" [alt]="key().product?.name" class="h-full w-full object-cover rounded-md">
+          </div>
+        </div>
+      }
+      <div>
+        <h2 class="text-xl font-bold text-gray-800 tracking-tight">{{key().product?.name || 'Premium Access'}}</h2>
+        <p class="text-indigo-600 font-medium">
+          @if (key().product?.price) {
+            <span class="inline-flex items-center">
+              <span class="text-xs uppercase mr-1 opacity-70">Price:</span> 
+              <span class="text-lg font-bold">{{key().product?.price | currency }}</span>
+            </span>
+          }
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-4 md:mt-0 flex items-center space-x-2">
+      <span class="px-3 py-1 rounded-full text-xs font-medium uppercase border border-indigo-100 text-indigo-700 bg-indigo-50">
+        @if (key().isActive) {
+          <span class="flex items-center">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
+            Active
+          </span>
+        } @else {
+          <span class="flex items-center">
+            <span class="w-2 h-2 rounded-full bg-red-500 mr-2"></span>
+            Inactive
+          </span>
+        }
+      </span>
+      <span class="text-xs text-gray-500">ID: {{key().userId.slice(0,8)}}</span>
+    </div>
+  </div>
+  
+  <!-- Sección de la llave con efecto resplandor -->
+  <div class="relative flex flex-col md:flex-row items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-hidden group">
+    <div class="absolute inset-0 bg-gradient-to-r from-indigo-50/10 to-violet-50/10 opacity-40"></div>
+    <div class="w-full relative z-10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div class="flex-1">
+          <p class="text-xs uppercase text-indigo-600 font-semibold mb-1 tracking-wide">Your Exclusive Access Key</p>
+          <div class="relative flex items-center">
+            <span class="bg-white text-gray-800 font-mono text-sm md:text-base p-3 rounded-md w-full overflow-x-auto whitespace-nowrap select-all border border-gray-200 group-hover:border-indigo-300 transition-colors">
+              {{key().key}}
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-200/20 to-transparent group-hover:animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" style="background-size: 200% 100%;"></div>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <button (click)="copyKeyToClipboard()" mat-icon-button class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-full shadow-md transition-all hover:shadow-indigo-300/50" aria-label="Copy key">
+            <mat-icon fontIcon="content_copy" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer con detalles y fecha -->
+  <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-gray-500">
+    <div>
+      <p>Purchased: {{key().createdAt | date:'medium'}}</p>
+      @if (key().updatedAt && key().updatedAt !== key().createdAt) {
+        <p>Last updated: {{key().updatedAt | date:'medium'}}</p>
+      }
+    </div>
+    <div class="mt-2 md:mt-0">
+      <button mat-stroked-button color="primary" class="text-xs h-8">
+        <mat-icon fontIcon="help_outline" class="text-sm mr-1"></mat-icon>
+        Need Help?
+      </button>
+    </div>
+  </div>
 </div>
-

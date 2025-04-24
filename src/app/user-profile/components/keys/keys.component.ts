@@ -3,10 +3,11 @@ import { IKey } from '../../interfaces/IKey';
 import { KeysService } from '../../services/keys.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { KeyDetailsComponent } from "../key-details/key-details.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'keys',
-  imports: [MatProgressSpinnerModule, KeyDetailsComponent],
+  imports: [MatProgressSpinnerModule, KeyDetailsComponent, RouterLink],
   templateUrl: './keys.component.html'
 })
 export class KeysComponent implements OnInit {
