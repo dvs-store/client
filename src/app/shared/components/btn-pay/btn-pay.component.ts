@@ -1,10 +1,11 @@
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { PaymentsService } from '../../../store/services/payments.service';
 import { isPlatformBrowser } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'btn-pay',
-  imports: [],
+  imports: [MatButtonModule],
   templateUrl: './btn-pay.component.html'
 })
 export class BtnPayComponent {
@@ -12,12 +13,14 @@ export class BtnPayComponent {
   private paymentsService = inject(PaymentsService);
   private PLATFORM_ID = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.PLATFORM_ID);
+  protected isLoading = signal<boolean>(false);
 
 
   public onPay(){
+    this.isLoading.set(true);
+
     this.paymentsService.onGetLinkPay({})
       .subscribe({
-        error: console.log,
         next: data => {
           if( this.isBrowser ){
             window.location.href = data.url;

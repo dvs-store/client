@@ -10,7 +10,6 @@ export function AuthTokenInterceptor(req: HttpRequest<unknown>, next: HttpHandle
     const token = authService.getAccessToken();
 
     if( token && req.url.includes('api/') && !req.url.includes('/users') ){
-        console.log('Enviando token: ' + req.url);
         const newReq = req.clone({
             headers: req.headers.append('Authorization', 'Bearer ' + token),
         });

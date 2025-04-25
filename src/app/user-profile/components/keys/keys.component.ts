@@ -28,7 +28,6 @@ export class KeysComponent implements OnInit {
     this.keysService.getKeys()
       .subscribe((keys) => {
         this.keys.set(keys)
-        console.log(keys);
       });
   }
 

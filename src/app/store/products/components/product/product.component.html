@@ -53,9 +53,13 @@
                 {{product().stock}} Stock
             </div>
 
-            <button [disabled]="isLoadingAddProduct()" (click)="addCart()" mat-icon-button>
-                <mat-icon fontIcon="shopping_cart"/>
-            </button>
+            @if (alreadyCart()) {
+                <button routerLink="/shopp/cart" mat-stroked-button>View cart</button>
+            }@else {
+                <button [disabled]="isLoadingAddProduct()" (click)="addCart()" mat-icon-button>
+                    <mat-icon fontIcon="shopping_cart"/>
+                </button>
+            }
         </div>
 
         <p class="text-xs text-gray-400 font-medium">Buy it now and receive it today.</p>

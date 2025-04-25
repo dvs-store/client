@@ -44,7 +44,6 @@ export default class ShoppingCartComponent implements OnInit {
       )
       .subscribe({
         next: () => this.cart.update(this.onUpdateResetCart),
-        error: e => console.log(e),
       });
   }
 

@@ -1,6 +1,12 @@
 
 
-<button (click)="onPay()">
-    Buy now
-</button>
+<div class="flex justify-center">
+    <button
+        mat-flat-button
+        [disabled]="isLoading()"
+        (click)="onPay()"
+    >
+        Buy now
+    </button>
+</div>
 

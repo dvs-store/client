@@ -1,11 +1,12 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import { IProductPreview } from '../../interfaces/IProductPreview';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CurrencyPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ShoppService } from '../../../shopp/services/shopp.service';
-import { finalize } from 'rxjs';
+import { finalize, map } from 'rxjs';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'product',
@@ -17,9 +18,29 @@ export class ProductComponent {
   public product = input.required<IProductPreview>();
   private shoppService = inject(ShoppService);
   protected isLoadingAddProduct = signal(false);
+  protected alreadyCart = signal<boolean>(false);
+
+
+  private result = effect(() => {
+    if( this.shoppCartService.cart() ){
+      this.loadExists();
+    }
+  })
+
+
+  constructor(
+    private shoppCartService:ShoppService,
+    private authService:AuthService,
+    private router:Router,
+  ){}
 
 
   protected addCart(){
+    if( !this.authService.isAuthenticated ){
+      this.router.navigate(['/register']);
+      return
+    }
+
     if( !this.product() || this.isLoadingAddProduct() ) return;
     this.isLoadingAddProduct.set(true);
 
@@ -27,10 +48,7 @@ export class ProductComponent {
       .pipe(
         finalize(() => this.isLoadingAddProduct.set(false)),
       )
-      .subscribe({
-        next: (data) => console.log(data),
-        error: (e) => console.log(e),
-      });
+      .subscribe(() => console.log('Product added'));
   }
 
   protected get isAccesAnticipated():boolean{
@@ -39,6 +57,11 @@ export class ProductComponent {
 
   protected get isNewProduct():boolean {
     return true;
+  }
+
+  protected loadExists() {
+    const exists = this.shoppCartService.productExists(this.product().id);
+    this.alreadyCart.set(exists);
   }
 
 

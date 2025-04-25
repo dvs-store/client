@@ -1,10 +1,10 @@
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/services/auth.service';
-import { finalize, merge } from 'rxjs';
+import { merge } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 import { ShoppService } from './store/shopp/services/shopp.service';
+import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 
 
 @Component({
@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
             this.authService.logout();
           }
         },
-        next: (data) => console.log(data),
       });
   }
 

@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { IShoppCartDto } from '../interfaces/IShoppCartDto';
 import { AuthService } from '../../../auth/services/auth.service';
+import { Id } from '../../../shared/interfaces/api/Id';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,11 @@ export class ShoppService {
           };
         }),
       );
+  }
+
+  public productExists(id:Id):boolean {
+    if( !this.cart() ) return false;
+    return !!this.cart()!.products.find(p => p.product.id === id);
   }
 
 }

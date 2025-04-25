@@ -14,7 +14,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'navbar',
-  imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass, MatBadgeModule],
+  imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass, MatBadgeModule, RouterOutlet],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
@@ -28,18 +28,18 @@ export class NavbarComponent {
       name: 'Home',
       path: '/'
     },
-    {
-      name: 'Products',
-      path: '/products'
-    },
-    {
-      name: 'Services',
-      path: '/services'
-    },
-    {
-      name: 'Subscriptions',
-      path: '/subscriptions'
-    },
+    // {
+    //   name: 'Products',
+    //   path: '/products'
+    // },
+    // {
+    //   name: 'Services',
+    //   path: '/services'
+    // },
+    // {
+    //   name: 'Subscriptions',
+    //   path: '/subscriptions'
+    // },
     {
       name: 'Support',
       path: '/support'

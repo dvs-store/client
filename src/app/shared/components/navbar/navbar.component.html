@@ -1,6 +1,6 @@
 <section
     [ngClass]="{'justify-center' : !isBrowser}"
-    class="flex flex-row justify-between py-3 px-16 bg-gray-50"
+    class="flex md:flex-row items-center flex-col md:justify-between gap-4 py-3 px-16 bg-gray-50"
 >
     @if (isBrowser) {
         <div>
@@ -63,4 +63,7 @@
         <navbar-skeleton/>
     }
 </section>
+
+
+<router-outlet/>
 
