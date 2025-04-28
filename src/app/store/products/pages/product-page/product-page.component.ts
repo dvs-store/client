@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { HandleErrorsFn } from '../../../../shared/functions/HandleErrorsFn';
 import { IProduct } from '../../interfaces/IProduct';
@@ -11,20 +11,25 @@ import { finalize } from 'rxjs';
 import { IFaq } from '../../interfaces/IFaq';
 import { AlertComponent } from "../../../../shared/components/alert/alert.component";
 import { ProductSkeletonComponent } from "../../components/product-skeleton/product-skeleton.component";
+import { ShoppService } from '../../../shopp/services/shopp.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'product-page',
-  imports: [TitleCasePipe, CurrencyPipe, DatePipe, MatTabsModule, MatExpansionModule, AlertComponent, ProductSkeletonComponent],
+  imports: [TitleCasePipe, CurrencyPipe, DatePipe, MatTabsModule, MatExpansionModule, AlertComponent, ProductSkeletonComponent, MatButtonModule, RouterLink],
   templateUrl: './product-page.component.html'
 })
 export default class ProductPageComponent implements OnInit {
 
   private router = inject(ActivatedRoute);
+  private cartService:ShoppService = inject(ShoppService);
   protected error = signal<string | null>(null);
   private productsService = inject(ProductsService);
   protected product = signal<IProduct | null>(null);
   private title = inject(Title);
   private meta = inject(Meta);
+  protected productExists = signal<boolean>(false);
+  protected isLoadingAddCart = signal<boolean>(false);
   protected questions = signal<IFaq[]>([
     {
       content: 'Access is immediate, once your purchase is made, you will receive an email with your invoice, details of your purchase and the content to be able to access, you will also be able to see more details in your profile on our website',
@@ -44,6 +49,10 @@ export default class ProductPageComponent implements OnInit {
     }
   ]);
 
+  private loadEffect = effect(() => {
+    if( !this.product() ) return;
+    this.productExists.set(this.cartService.productExists(this.product()!.id));
+  });
 
   ngOnInit(): void {
     this.findProduct();
@@ -81,6 +90,17 @@ export default class ProductPageComponent implements OnInit {
     if( this.product() ){
       this.meta.updateTag({name: 'og:image', content: `${this.product()!.image}`});
     }
+  }
+
+  protected addProductCart(){
+    console.log(this.product());
+    this.isLoadingAddCart.set(true);
+
+    this.cartService.addProduct(this.product()!.id as string)
+      .pipe(
+        finalize(() => this.isLoadingAddCart.set(false))
+      )
+      .subscribe(() => console.log('Add'));
   }
 
 }

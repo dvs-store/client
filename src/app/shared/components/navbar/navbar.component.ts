@@ -1,8 +1,7 @@
-import { Component, effect, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { INavLink } from '../../interfaces/navbar/INavLink';
 import { ProfileImageComponent } from "../profile-image/profile-image.component";
 import {MatMenuModule} from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +13,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'navbar',
-  imports: [RouterLink, RouterLinkActive, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass, MatBadgeModule, RouterOutlet],
+  imports: [RouterLink, MatButtonModule, MatMenuModule, ProfileImageComponent, MatIconModule, NavbarSkeletonComponent, NgClass, MatBadgeModule, RouterOutlet],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {

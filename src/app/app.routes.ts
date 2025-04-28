@@ -37,6 +37,7 @@ export const routes: Routes = [
     },
     {
         path: 'contact/support',
+        canActivate: [isLogged],
         loadComponent: () => import('./pages/support-page/support-page.component'),
     },
 
