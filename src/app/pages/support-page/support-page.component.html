@@ -1,0 +1,30 @@
+
+
+<h2 class="text-center mt-20 md:text-4xl text-3xl text-black font-bold">Contact us</h2>
+
+
+<form
+  [formGroup]="contact"
+  class="max-w-xl mt-24 bg-white shadow-lg mx-auto px-4 py-3"
+  (submit)="onSubmit()"
+>
+  <p class='text-center mt-2 mb-2 text-sm'>Do you have any problems? Contact us and we will help you</p>
+
+  <mat-form-field class="w-full mt-2">
+    <mat-label>Select the category</mat-label>
+    <mat-select formControlName="category">
+      @for (category of contactCategories; track $index) {
+        <mat-option [value]="category">{{category}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-full">
+    <mat-label>Describe your problem</mat-label>
+    <textarea formControlName="description" matInput></textarea>
+  </mat-form-field>
+
+  <div class="flex justify-center">
+    <button [disabled]="isLoading() || contact.invalid" mat-flat-button>Send</button>
+  </div>
+</form>

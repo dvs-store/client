@@ -35,6 +35,10 @@ export const routes: Routes = [
         canActivate: [checkAdminGuard],
         loadComponent: () => import('./store/admin/pages/products/products.component'),
     },
+    {
+        path: 'contact/support',
+        loadComponent: () => import('./pages/support-page/support-page.component'),
+    },
 
 
     {

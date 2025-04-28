@@ -42,7 +42,7 @@ export class NavbarComponent {
     // },
     {
       name: 'Support',
-      path: '/support'
+      path: 'contact/support'
     },
   ]);
 
