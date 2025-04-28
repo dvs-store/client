@@ -4,10 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe, DatePipe, isPlatformBrowser } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'key-details',
-  imports: [MatButtonModule, MatIconModule, DatePipe, CurrencyPipe],
+  imports: [MatButtonModule, MatIconModule, DatePipe, CurrencyPipe, RouterLink],
   templateUrl: './key-details.component.html'
 })
 export class KeyDetailsComponent {

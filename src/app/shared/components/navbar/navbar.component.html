@@ -9,17 +9,6 @@
                 class="text-blue-500 cursor-pointer font-bold md:text-xl text-xl">DevComplete Studios
             </h1>
         </div>
-    
-        <div class="flex items-center gap-5 font-sans">
-            @for (link of links(); track $index) {
-                <a
-                    routerLinkActive="opacity-100"
-                    class="opacity-70 text-xs font-medium"
-                    [routerLink]="link.path"
-                    [title]="link.name"
-                >{{link.name}}</a>
-            }
-        </div>
 
         @if (authService.user() != null) {
             <div class="flex gap-5 items-center">

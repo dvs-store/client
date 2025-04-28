@@ -24,7 +24,11 @@
     <textarea formControlName="description" matInput></textarea>
   </mat-form-field>
 
-  <div class="flex justify-center">
+  @if (emailSend()) {
+    <alert type="SUCCES" message="Thank you for contacting us. Someone from support will respond shortly."/>
+  }
+
+  <div class="flex justify-center mt-4">
     <button [disabled]="isLoading() || contact.invalid" mat-flat-button>Send</button>
   </div>
 </form>

@@ -23,28 +23,6 @@ export class NavbarComponent {
   protected shoppService:ShoppService = inject(ShoppService);
   private platformId = inject(PLATFORM_ID);
   protected isBrowser = isPlatformBrowser(this.platformId);
-  protected links = signal<INavLink[]>([
-    {
-      name: 'Home',
-      path: '/'
-    },
-    // {
-    //   name: 'Products',
-    //   path: '/products'
-    // },
-    // {
-    //   name: 'Services',
-    //   path: '/services'
-    // },
-    // {
-    //   name: 'Subscriptions',
-    //   path: '/subscriptions'
-    // },
-    {
-      name: 'Support',
-      path: 'contact/support'
-    },
-  ]);
 
   protected logout(){
     this.authService.logout();
