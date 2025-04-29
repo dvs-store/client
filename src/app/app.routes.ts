@@ -40,6 +40,10 @@ export const routes: Routes = [
         canActivate: [isLogged],
         loadComponent: () => import('./pages/support-page/support-page.component'),
     },
+    {
+        path: 'payment-success',
+        loadComponent: () => import('./pages/success-payment/success-payment.component'),
+    },
 
 
     {
