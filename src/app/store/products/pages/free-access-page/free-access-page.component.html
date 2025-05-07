@@ -1,8 +1,27 @@
 <h2 class="text-center font-medium md:text-3xl text-2xl my-24">Get 1-day access for free.</h2>
 
 
-@if (product()) {
-}@else {
-    <p class="text-center mt-12">Product not found...</p>
-}
+<section class="max-w-xl md:mx-auto mx-5 shadow-md bg-gray-200 px-4 py-2">
+    @if (product()) {
+        @let prod = product()!;
+
+        <p class="text-center font-medium text-lg">Unlock a free key for <span class="text-indigo-600">{{prod.name}}</span></p>
+        <hr class="my-2 text-gray-300"/>
+
+        <div class="flex flex-wrap gap-3 justify-center my-4">
+            <button mat-flat-button (click)="getKeyFree()">Get key</button>
+
+            @if (prod.youtubeLink) {
+                <a target="_blank" [href]="prod.youtubeLink" mat-flat-button>Watch more</a>
+            }
+        </div>
+
+        @if (!isValidFreeAccess()) {
+            <p class="text-xs text-gray-500 mt-8 mb-4 text-center">1.- Complete the steps to continue</p>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        }
+    }@else {
+        <p class="text-center mt-12">Product not found...</p>
+    }
+</section>
 

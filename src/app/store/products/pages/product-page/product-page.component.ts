@@ -13,10 +13,11 @@ import { AlertComponent } from "../../../../shared/components/alert/alert.compon
 import { ProductSkeletonComponent } from "../../components/product-skeleton/product-skeleton.component";
 import { ShoppService } from '../../../shopp/services/shopp.service';
 import { MatButtonModule } from '@angular/material/button';
+import { CopyContentComponent } from "../../../../shared/components/copy-content/copy-content.component";
 
 @Component({
   selector: 'product-page',
-  imports: [TitleCasePipe, CurrencyPipe, DatePipe, MatTabsModule, MatExpansionModule, AlertComponent, ProductSkeletonComponent, MatButtonModule, RouterLink],
+  imports: [TitleCasePipe, CurrencyPipe, DatePipe, MatTabsModule, MatExpansionModule, AlertComponent, ProductSkeletonComponent, MatButtonModule, RouterLink, CopyContentComponent],
   templateUrl: './product-page.component.html'
 })
 export default class ProductPageComponent implements OnInit {

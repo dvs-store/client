@@ -1,0 +1,21 @@
+<div class="relative flex flex-col md:flex-row items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-hidden group">
+  <div class="absolute inset-0 bg-gradient-to-r from-indigo-50/10 to-violet-50/10 opacity-40"></div>
+  <div class="w-full relative z-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div class="flex-1">
+        <p class="text-xs uppercase text-indigo-600 font-semibold mb-1 tracking-wide">{{data().title}}</p>
+        <div class="relative flex items-center">
+          <span class="bg-white text-gray-800 font-mono text-sm md:text-base p-3 rounded-md w-full overflow-x-auto whitespace-nowrap select-all border border-gray-200 group-hover:border-indigo-300 transition-colors">
+            {{data().content}}
+          </span>
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-200/20 to-transparent group-hover:animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity" style="background-size: 200% 100%;"></div>
+        </div>
+      </div>
+      <div class="flex-shrink-0">
+        <button (click)="copyKeyToClipboard()" mat-icon-button class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-full shadow-md transition-all hover:shadow-indigo-300/50" aria-label="Copy key">
+          <mat-icon fontIcon="content_copy" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
