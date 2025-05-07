@@ -96,6 +96,11 @@
                             <img width="24px" height="24px" class="w-6 h-6" src="/icons/copy.svg" alt="Youtube Icon">
                         </a>
                     }
+                    @if (product()?.isFreeKeyActive) {
+                        <button mat-flat-button routerLink="/products/free/{{product()!.name.toLowerCase().replaceAll(' ', '-')}}">
+                            Get Access free
+                        </button>
+                    }
                 </div>
             </div>
 

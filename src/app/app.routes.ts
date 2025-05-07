@@ -31,6 +31,10 @@ export const routes: Routes = [
         loadComponent: () => import('./store/products/pages/product-page/product-page.component'),
     },
     {
+        path: 'products/free/:name',
+        loadComponent: () => import('./store/products/pages/free-access-page/free-access-page.component'),
+    },
+    {
         path: 'admin/products',
         canActivate: [checkAdminGuard],
         loadComponent: () => import('./store/admin/pages/products/products.component'),

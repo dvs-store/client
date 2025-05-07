@@ -54,6 +54,7 @@ export default class ProductPageComponent implements OnInit {
     this.productExists.set(this.cartService.productExists(this.product()!.id));
   });
 
+
   ngOnInit(): void {
     this.findProduct();
   }
@@ -93,7 +94,6 @@ export default class ProductPageComponent implements OnInit {
   }
 
   protected addProductCart(){
-    console.log(this.product());
     this.isLoadingAddCart.set(true);
 
     this.cartService.addProduct(this.product()!.id as string)

@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from '../helpers/AuthConfig';
 import { isPlatformBrowser } from '@angular/common';

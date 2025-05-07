@@ -19,5 +19,6 @@ export interface IProduct {
     status:IStatusProduct;
     isActive:Boolean;
     id:Id;
+    isFreeKeyActive: boolean;
 }
 

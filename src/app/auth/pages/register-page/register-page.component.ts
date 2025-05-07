@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy, OnInit, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {
   FormControl,
@@ -21,6 +21,7 @@ import { InputEmailComponent } from "../../components/input-email/input-email.co
 import { InputPasswordComponent } from "../../components/input-password/input-password.component";
 import { LoginGoogleComponent } from "../../components/login-google/login-google.component";
 import { HandleErrorsFn } from '../../../shared/functions/HandleErrorsFn';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -55,7 +56,7 @@ export default class RegisterPageComponent implements OnInit {
 
   private authService = inject(AuthService);
 
-
+  private plaftormId = inject(PLATFORM_ID);
   protected isLoading = signal<boolean>(false);
   protected signUpError = signal<string | null>(null);
   protected signUpSucces = signal<string | null>(null);
@@ -72,6 +73,11 @@ export default class RegisterPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onLoadTags();
+  }
+
+
+  private onLoadTags(){
     this.title.setTitle('DVS | Register');
 
     this.meta.updateTag({ 
