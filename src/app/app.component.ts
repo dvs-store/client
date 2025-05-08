@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/services/auth.service';
 import { merge } from 'rxjs';
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
           if(e.status === 401){
             this.authService.logout();
           }
-        },
+        }
       });
   }
 

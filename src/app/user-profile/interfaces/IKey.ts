@@ -14,5 +14,6 @@ export interface IKey {
     isActive: boolean;
     updatedAt:Date;
     createdAt:Date;
+    expiredAt:Date;
 }
 

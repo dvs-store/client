@@ -1,4 +1,4 @@
-import { Component, input} from '@angular/core';
+import { Component, input, OnInit} from '@angular/core';
 import { IKey } from '../../interfaces/IKey';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

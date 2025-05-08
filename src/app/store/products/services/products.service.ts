@@ -83,8 +83,11 @@ export class ProductsService {
     return this.clientHttp.post<boolean>(this.url(), body, {headers});
   }
 
-  public unlockFreeAccess(productName:string):Observable<{url:string}>{
-    return this.clientHttp.post<{url:string}>(`http://localhost:8090/api/products-keys/auth/generate-link`, {urlRedirect: `/free/${productName}`});
+  public getFreeKey(productId:string):Observable<boolean>{
+    const headers = this.authService.getHeaderBearerToken;
+    const body = {productId, userId: this.authService.getUser!.userId};
+
+    return this.clientHttp.post<boolean>(`http://localhost:8090/api/products-keys/free`, body, {headers});
   }
 
 

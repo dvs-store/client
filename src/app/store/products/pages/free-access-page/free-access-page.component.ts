@@ -25,7 +25,6 @@ export default class FreeAccessPageComponent implements OnInit {
   private isBrowser = isPlatformBrowser(this.platformId);
   protected isLoading = signal<boolean>(false);
   protected isValidFreeAccess = signal<boolean>(this.isBrowser && localStorage.getItem("free-access") != null);
-  protected productName = signal<string>('');
 
 
   ngOnInit(): void {
@@ -42,10 +41,7 @@ export default class FreeAccessPageComponent implements OnInit {
         finalize(() => this.loadMetatags())
       )
       .subscribe({
-        next: (product) => {
-          this.product.set(product);
-          this.productName.set(product.name.trim().toLowerCase().replaceAll(" ", "-"));
-        },
+        next: (product) => this.product.set(product),
         error: (error) => console.log({error}),
       })
   }
@@ -73,8 +69,8 @@ export default class FreeAccessPageComponent implements OnInit {
   }
 
   protected saveNameLocalStorage(){
-    if( !this.isBrowser ) return;
-    localStorage.setItem('last-product', this.productName());
+    if( !this.isBrowser || !this.product() ) return;
+    localStorage.setItem('last-product', this.product()!.id.toString());
   }
 
 }

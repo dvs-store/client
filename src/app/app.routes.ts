@@ -32,10 +32,12 @@ export const routes: Routes = [
     },
     {
         path: 'products/free/:name',
+        canActivate: [isLogged],
         loadComponent: () => import('./store/products/pages/free-access-page/free-access-page.component'),
     },
     {
         path: 'products/unlock/key-free',
+        canActivate: [isLogged],
         loadComponent: () => import('./store/products/pages/unlock-free-key-page/unlock-free-key-page.component'),
     },
     {

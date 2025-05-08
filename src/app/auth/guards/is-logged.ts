@@ -3,5 +3,7 @@ import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 export const isLogged: CanActivateFn = (route, state) => {
-  return inject(AuthService).isAuthenticated;
+  const value = inject(AuthService).isAuthenticated;
+
+  return value;
 };

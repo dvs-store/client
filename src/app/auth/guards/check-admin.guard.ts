@@ -9,6 +9,5 @@ export const checkAdminGuard: CanActivateFn = (route, state) => {
   if( !user ) return false;
   const roles = user.roles;
 
-  if( !roles.includes('ADMIN') ) return false;
-  return true;
+  return roles.includes('ADMIN');
 };
