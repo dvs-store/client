@@ -35,6 +35,10 @@ export const routes: Routes = [
         loadComponent: () => import('./store/products/pages/free-access-page/free-access-page.component'),
     },
     {
+        path: 'products/unlock/key-free',
+        loadComponent: () => import('./store/products/pages/unlock-free-key-page/unlock-free-key-page.component'),
+    },
+    {
         path: 'admin/products',
         canActivate: [checkAdminGuard],
         loadComponent: () => import('./store/admin/pages/products/products.component'),

@@ -23,7 +23,9 @@ export default class FreeAccessPageComponent implements OnInit {
   private metaTags = inject(Meta);
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
+  protected isLoading = signal<boolean>(false);
   protected isValidFreeAccess = signal<boolean>(this.isBrowser && localStorage.getItem("free-access") != null);
+  protected productName = signal<string>('');
 
 
   ngOnInit(): void {
@@ -40,7 +42,10 @@ export default class FreeAccessPageComponent implements OnInit {
         finalize(() => this.loadMetatags())
       )
       .subscribe({
-        next: (product) => this.product.set(product),
+        next: (product) => {
+          this.product.set(product);
+          this.productName.set(product.name.trim().toLowerCase().replaceAll(" ", "-"));
+        },
         error: (error) => console.log({error}),
       })
   }
@@ -60,7 +65,16 @@ export default class FreeAccessPageComponent implements OnInit {
   }
 
   protected getKeyFree(){
-    console.log('Obteniendo llave...');
+    if( !this.product() || !this.isBrowser ) return;
+
+    this.isLoading.set(true);
+    this.saveNameLocalStorage();
+    window.location.href = "https://direct-link.net/818959/script-access-free-01";
+  }
+
+  protected saveNameLocalStorage(){
+    if( !this.isBrowser ) return;
+    localStorage.setItem('last-product', this.productName());
   }
 
 }

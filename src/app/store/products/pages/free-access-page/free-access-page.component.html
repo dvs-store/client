@@ -9,7 +9,7 @@
         <hr class="my-2 text-gray-300"/>
 
         <div class="flex flex-wrap gap-3 justify-center my-4">
-            <button mat-flat-button (click)="getKeyFree()">Get key</button>
+            <button [disabled]="isLoading()" mat-flat-button (click)="getKeyFree()">Get key</button>
 
             @if (prod.youtubeLink) {
                 <a target="_blank" [href]="prod.youtubeLink" mat-flat-button>Watch more</a>
