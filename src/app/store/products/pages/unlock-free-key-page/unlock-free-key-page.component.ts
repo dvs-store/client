@@ -5,10 +5,13 @@ import { HandleErrorsFn } from '../../../../shared/functions/HandleErrorsFn';
 import { Id } from '../../../../shared/interfaces/api/Id';
 import { finalize } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AlertComponent } from "../../../../shared/components/alert/alert.component";
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-unlock-free-key-page',
-  imports: [RouterLink],
+  imports: [RouterLink, MatProgressSpinnerModule, AlertComponent, MatButtonModule],
   templateUrl: './unlock-free-key-page.component.html'
 })
 export default class UnlockFreeKeyPageComponent implements OnInit {

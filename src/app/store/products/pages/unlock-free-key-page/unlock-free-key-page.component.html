@@ -2,12 +2,17 @@
 
 <div class="my-24">
     @if (getNewKey() == null) {
-        <p>Is loading...</p>
+        <mat-spinner/>
     }@else if (!getNewKey()) {
-        <p>Not valid</p>
+        <alert type="WARNING" message="You must follow the steps to unlock your key"/>
+        <div class="mt-8 flex justify-center">
+            <button mat-flat-button routerLink="/">View products</button>
+        </div>
     }@else {
-        <p>New key: </p>
-        <a routerLink="/"></a>
+        <alert type="SUCCES" message="Your key was unlocked successfully"/>
+        <div class="mt-8 flex justify-center">
+            <button mat-flat-button routerLink="/user/profile">My key</button>
+        </div>
     }
 </div>
 
