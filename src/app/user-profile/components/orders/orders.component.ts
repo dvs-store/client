@@ -1,11 +1,12 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { OrdersService } from '../../services/orders.service';
 import { IOrder } from '../../interfaces/IOrder';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OrdersDetailsComponent } from "../../../components/orders-details/orders-details.component";
 
 @Component({
   selector: 'orders',
-  imports: [MatProgressSpinnerModule],
+  imports: [MatProgressSpinnerModule, OrdersDetailsComponent],
   templateUrl: './orders.component.html'
 })
 export class OrdersComponent implements OnInit {

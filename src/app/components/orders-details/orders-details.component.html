@@ -1,0 +1,5 @@
+
+<li class="bg-gray-100 rounded-lg px-3 py-2">
+    <h4> Purchase At: {{order().createdAt | date }} </h4>
+    <p>Amount: {{(order().amount / 100) | currency}}</p>
+</li>

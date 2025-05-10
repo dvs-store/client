@@ -5,5 +5,10 @@
         <mat-spinner/>
     </div>
 }@else {
+    <ul class="max-w-xl mx-auto px-4 py-3 flex flex-col space-y-3">
+        @for (order of orders(); track $index) {
+            <orders-details [order]="order"/>
+        }
+    </ul>
 }
 
