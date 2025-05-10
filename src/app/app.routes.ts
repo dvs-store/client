@@ -2,16 +2,8 @@ import { Routes } from '@angular/router';
 import { isNotLogged } from './auth/guards/isNot-logged';
 import { isLogged } from './auth/guards/is-logged';
 import { checkAdminGuard } from './auth/guards/check-admin.guard';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 export const routes: Routes = [
-    // {
-    //     path: '',
-    //     component: NavbarComponent,
-    //     children: [
-            
-    //     ]
-    // },
     {
         path: '',
         loadComponent: () => import('./pages/home-page/home-page.component'),

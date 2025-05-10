@@ -1,10 +1,13 @@
 
 
 <div class="my-24">
-    @if (!key()) {
-        <p class="text-center">Loading...</p>
+    @if (getNewKey() == null) {
+        <p>Is loading...</p>
+    }@else if (!getNewKey()) {
+        <p>Not valid</p>
     }@else {
-
+        <p>New key: </p>
+        <a routerLink="/"></a>
     }
 </div>
 
