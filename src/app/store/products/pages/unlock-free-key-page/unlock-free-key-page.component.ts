@@ -8,10 +8,11 @@ import { RouterLink } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AlertComponent } from "../../../../shared/components/alert/alert.component";
 import { MatButtonModule } from '@angular/material/button';
+import { CopyContentComponent } from "../../../../shared/components/copy-content/copy-content.component";
 
 @Component({
   selector: 'app-unlock-free-key-page',
-  imports: [RouterLink, MatProgressSpinnerModule, AlertComponent, MatButtonModule],
+  imports: [RouterLink, MatProgressSpinnerModule, AlertComponent, MatButtonModule, CopyContentComponent],
   templateUrl: './unlock-free-key-page.component.html'
 })
 export default class UnlockFreeKeyPageComponent implements OnInit {
@@ -20,7 +21,8 @@ export default class UnlockFreeKeyPageComponent implements OnInit {
   private isBrowser = isPlatformBrowser(this.platformId);
   private productsService:ProductsService = inject(ProductsService);
   protected error = signal<string | null>(null);
-  protected getNewKey = signal<boolean | null>(null);
+  protected key = signal<string | null>(null);
+  protected isLoading = signal<boolean>(true);
 
 
   ngOnInit(): void {
@@ -36,7 +38,8 @@ export default class UnlockFreeKeyPageComponent implements OnInit {
   protected loadProduct(){
     const id = localStorage.getItem('last-product');
     if( !id ){
-      this.getNewKey.set(false);
+      this.key.set(null);
+      this.isLoading.set(false);
       return;
     };
 
@@ -52,11 +55,16 @@ export default class UnlockFreeKeyPageComponent implements OnInit {
 
   protected getKeyFree(productId:Id){
     return this.productsService.getFreeKey(productId as string)
+      .pipe(
+        finalize(() => this.isLoading.set(false)),
+      )
       .subscribe({
-        next: (value) => this.getNewKey.set(value),
+        next: (value) => {
+          this.key.set(value.key);
+        },
         error: (error) => {
           this.error.set(HandleErrorsFn(error));
-          this.getNewKey.set(false);
+          this.key.set(null);
           console.log({error});
         },
       });

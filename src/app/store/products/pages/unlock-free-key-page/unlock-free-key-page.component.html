@@ -1,17 +1,17 @@
 
 
-<div class="my-24">
-    @if (getNewKey() == null) {
+<div class="mt-24 mb-44">
+    @if (isLoading()) {
         <mat-spinner/>
-    }@else if (!getNewKey()) {
+    }@else if (!key()) {
         <alert type="WARNING" message="You must follow the steps to unlock your key"/>
         <div class="mt-8 flex justify-center">
             <button mat-flat-button routerLink="/">View products</button>
         </div>
     }@else {
         <alert type="SUCCES" message="Your key was unlocked successfully"/>
-        <div class="mt-8 flex justify-center">
-            <button mat-flat-button routerLink="/user/profile">My key</button>
+        <div class="mt-8 flex flex-col gap-2 max-w-lg mx-auto">
+            <copy-content [data]="{title:'Key free', content: key()!}"/>
         </div>
     }
 </div>

@@ -83,11 +83,11 @@ export class ProductsService {
     return this.clientHttp.post<boolean>(this.url(), body, {headers});
   }
 
-  public getFreeKey(productId:string):Observable<boolean>{
+  public getFreeKey(productId:string):Observable<{key:string}>{
     const headers = this.authService.getHeaderBearerToken;
     const body = {productId, userId: this.authService.getUser!.userId};
 
-    return this.clientHttp.post<boolean>(`http://localhost:8090/api/products-keys/free`, body, {headers});
+    return this.clientHttp.post<{key:string}>(`http://localhost:8090/api/products-keys/free`, body, {headers});
   }
 
 
