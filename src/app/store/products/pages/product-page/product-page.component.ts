@@ -14,6 +14,7 @@ import { ProductSkeletonComponent } from "../../components/product-skeleton/prod
 import { ShoppService } from '../../../shopp/services/shopp.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CopyContentComponent } from "../../../../shared/components/copy-content/copy-content.component";
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'product-page',
@@ -22,6 +23,7 @@ import { CopyContentComponent } from "../../../../shared/components/copy-content
 })
 export default class ProductPageComponent implements OnInit {
 
+  private authService:AuthService = inject(AuthService);
   private router = inject(ActivatedRoute);
   private cartService:ShoppService = inject(ShoppService);
   protected error = signal<string | null>(null);
@@ -102,6 +104,10 @@ export default class ProductPageComponent implements OnInit {
         finalize(() => this.isLoadingAddCart.set(false))
       )
       .subscribe(() => console.log('Add'));
+  }
+
+  protected get isAuth():boolean{
+    return this.authService.isAuthenticated;
   }
 
 }

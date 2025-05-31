@@ -12,5 +12,6 @@ export interface IOrder {
     paymentMethod: string;
     description:string;
     amount:number;
+    products:{productId:string; quantity:number;}[];
 }
 

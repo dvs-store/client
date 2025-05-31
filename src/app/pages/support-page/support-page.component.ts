@@ -8,6 +8,7 @@ import { SupportService } from '../../services/support.service';
 import { IContactEmailSupport } from '../../services/interfaces/support/IContactEmailSupport';
 import { finalize } from 'rxjs';
 import { AlertComponent } from "../../shared/components/alert/alert.component";
+import { HandleErrorsFn } from '../../shared/functions/HandleErrorsFn';
 
 
 
@@ -19,9 +20,11 @@ import { AlertComponent } from "../../shared/components/alert/alert.component";
 export default class SupportPageComponent {
 
   protected contact = new FormGroup({
-    category: new FormControl<CategorySupportType>('Website', []),
+    category: new FormControl<CategorySupportType>('Website', [Validators.required]),
     description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]),
   });
+
+  protected error = signal<string | null>(null);
 
   protected contactCategories:CategorySupportType[] = [
     'Payments and subscriptions',
@@ -53,9 +56,12 @@ export default class SupportPageComponent {
       .pipe(
         finalize(() => this.isLoading.set(false))
       )
-      .subscribe(() => {
-        this.contact.reset();
-        this.emailSend.set(true);
+      .subscribe({
+        next: () => {
+          this.contact.reset();
+          this.emailSend.set(true);
+        },
+        error: (error) => this.error.set(HandleErrorsFn(error)),
       });
   }
 

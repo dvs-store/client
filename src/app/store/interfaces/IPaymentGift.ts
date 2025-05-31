@@ -1,5 +1,5 @@
 
 
 export interface IPaymentGift {
-    emailGift?:string;
+    email?:string;
 }

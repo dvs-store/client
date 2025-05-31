@@ -1,4 +1,4 @@
 
 
-export type OrderStatusType = 'SUCCESSFULLY' | 'FAILED' | 'REFUND' | 'PROCESSING';
+export type OrderStatusType = 'SUCCESSFULLY' | 'FAILED' | 'REFUND' | 'PROCESSING'  | 'PENDING_PAYMENT';
 

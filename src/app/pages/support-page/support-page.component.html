@@ -26,6 +26,8 @@
 
   @if (emailSend()) {
     <alert type="SUCCES" message="Thank you for contacting us. Someone from support will respond shortly."/>
+  }@else if (error()) {
+    <alert type="ERROR" [message]="error()!"/>
   }
 
   <div class="flex justify-center mt-4">

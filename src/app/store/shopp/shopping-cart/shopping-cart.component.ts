@@ -9,10 +9,12 @@ import { CurrencyPipe, NgClass } from '@angular/common';
 import { ProductCartComponent } from "../components/product-cart/product-cart.component";
 import { BtnPayComponent } from "../../../shared/components/btn-pay/btn-pay.component";
 import { finalize } from 'rxjs';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AlertComponent } from "../../../shared/components/alert/alert.component";
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [RouterLink, MatButtonModule, MatIconModule, CurrencyPipe, ProductCartComponent, BtnPayComponent],
+  imports: [RouterLink, MatButtonModule, MatIconModule, CurrencyPipe, ProductCartComponent, BtnPayComponent, AlertComponent, ReactiveFormsModule],
   templateUrl: './shopping-cart.component.html'
 })
 export default class ShoppingCartComponent implements OnInit {
@@ -21,6 +23,7 @@ export default class ShoppingCartComponent implements OnInit {
   private shoppService = inject(ShoppService);
   protected error = signal<string | null>(null);
   protected isLoading = signal<boolean>(false);
+  protected giftTo = new FormControl('', [Validators.email]);
 
 
   ngOnInit(): void {

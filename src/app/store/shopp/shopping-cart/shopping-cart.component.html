@@ -18,6 +18,7 @@
             <div class="flex md:flex-row flex-col gap-3 items-center mt-3">
                 <p class="text-xs font-medium">Send gift to</p>
                 <input
+                    [formControl]="giftTo"
                     class="bg-white md:w-1/2 w-full rounded-xl shadow-md outline-1 focus:outline-2 outline-blue-500 px-2 py-0.5"
                     type="text"
                     placeholder="Ex. friend@correo.com"
@@ -37,9 +38,13 @@
                 }
             </div>
 
-            <p class="text-blue-500 text-xs ml-4 mt-1">Every purchase over $30 gets you an 8% discount.</p>
+            <p class="text-blue-500 text-xs ml-4 mt-1 mb-2">Every purchase over $30 gets you an 8% discount.</p>
 
-            <btn-pay/>
+            @if (giftTo.invalid) {
+                <alert type="ERROR" message="Email is not valid"/>
+            }@else {
+                <btn-pay [emailGift]="giftTo.value ?? undefined"/>
+            }
         } @else {
             <div class="text-center py-12">
                 <div class="mb-4 text-gray-400">

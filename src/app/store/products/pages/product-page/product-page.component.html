@@ -93,7 +93,7 @@
                             </a>
                         }
                         @if (product()?.isFreeKeyActive) {
-                            <button mat-flat-button routerLink="/products/free/{{product()!.name.toLowerCase().replaceAll(' ', '-')}}">
+                            <button mat-flat-button routerLink="{{isAuth? `/products/free/${product()!.name.toLowerCase().replaceAll(' ', '-')}`: '/register'}}">
                                 Get Access free
                             </button>
                         }

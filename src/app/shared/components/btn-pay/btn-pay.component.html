@@ -10,3 +10,8 @@
     </button>
 </div>
 
+@if (error()) {
+    <div class="my-1.5">
+        <alert type="ERROR" [message]="error()!"/>
+    </div>
+}

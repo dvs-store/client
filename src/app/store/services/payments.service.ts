@@ -18,7 +18,7 @@ export class PaymentsService {
 
   public onGetLinkPay(dto:IPaymentGift):Observable<{url:string}>{
     const headers = this.authService.getHeaderBearerToken;
-    return this.httpClient.post<{url:string}>(`${this.url()}/buy`, {dto}, {headers});
+    return this.httpClient.post<{url:string}>(`${this.url()}/buy`, dto, {headers});
   }
 
 }
