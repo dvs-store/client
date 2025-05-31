@@ -54,11 +54,17 @@
 
   @if (order().status === 'FAILED') {
     <div class="flex justify-center mt-6">
-        <button mat-raised-button class="mx-auto">Contact support</button>
+        <button [disabled]="isLoading()" routerLink="/contact/support" mat-stroked-button class="mx-auto">Contact support</button>
     </div>
   }@else if (order().status != 'SUCCESSFULLY') {
     <div class="flex justify-center mt-6">
-        <button (click)="continuePaymnt()" mat-flat-button class="mx-auto">Payment</button>
+        <button [disabled]="isLoading()" (click)="continuePaymnt()" mat-flat-button class="mx-auto">Complete payment</button>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="mt-2.5" >
+      <alert type="ERROR" [message]="error()!"/>
     </div>
   }
 

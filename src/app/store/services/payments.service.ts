@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPaymentGift } from '../interfaces/IPaymentGift';
 import { AuthService } from '../../auth/services/auth.service';
+import { Id } from '../../shared/interfaces/api/Id';
 
 
 
@@ -19,6 +20,11 @@ export class PaymentsService {
   public onGetLinkPay(dto:IPaymentGift):Observable<{url:string}>{
     const headers = this.authService.getHeaderBearerToken;
     return this.httpClient.post<{url:string}>(`${this.url()}/buy`, dto, {headers});
+  }
+
+  public onContinuePay(orderId:Id):Observable<{url:string}>{
+    const headers = this.authService.getHeaderBearerToken;
+    return this.httpClient.get<{url:string}>(`${this.url()}/buy/${orderId}`, {headers});
   }
 
 }

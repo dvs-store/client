@@ -1,9 +1,13 @@
 
+<h2 class="mt-12 mb-1 text-center text-4xl md:text-3xl font-bold">Your orders</h2>
+<p class="max-w-2xl md:max-4 mx-auto text-center mb-12">Here you can see all your transactions and report any problems with any of them.</p>
 
 @if (!orders()) {
     <div class="flex justify-center mt-12">
         <mat-spinner/>
     </div>
+}@else if (orders()?.length == 0) {
+    <p routerLink="/" class="text-center underline cursor-pointer text-lg font-medium text-indigo-600">Make your first purchase! :D</p>
 }@else {
     <ul class="max-w-xl mx-auto px-4 py-3 flex flex-col space-y-3">
         @for (order of orders(); track $index) {

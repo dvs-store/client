@@ -3,10 +3,11 @@ import { OrdersService } from '../../services/orders.service';
 import { IOrder } from '../../interfaces/IOrder';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OrdersDetailsComponent } from "../../../components/orders-details/orders-details.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'orders',
-  imports: [MatProgressSpinnerModule, OrdersDetailsComponent],
+  imports: [MatProgressSpinnerModule, OrdersDetailsComponent, RouterLink],
   templateUrl: './orders.component.html'
 })
 export class OrdersComponent implements OnInit {
