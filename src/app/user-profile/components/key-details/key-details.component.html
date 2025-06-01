@@ -48,7 +48,12 @@
 
   <copy-content [data]="{title:'Your exclusive access key', content: key()!.key}"/>
 
-  <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-gray-500">
+  @if (key().userRobloxId){
+    <hr class="text-gray-200 my-3">
+    <h3 class="text-center py-1 px-2 rounded-full font-normal bg-green-600 text-white">The key is already in use</h3>
+  }
+
+  <div class="mt-4 flex flex-col md:flex-row justify-between items-start md:items-center text-xs text-gray-500">
     <div>
       <p>Purchased: {{key().createdAt | date:'medium'}}</p>
       @if (key().updatedAt && key().updatedAt !== key().createdAt) {

@@ -1,10 +1,11 @@
-import { Component, input, OnInit} from '@angular/core';
+import { Component, input } from '@angular/core';
 import { IKey } from '../../interfaces/IKey';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe, DatePipe} from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CopyContentComponent } from "../../../shared/components/copy-content/copy-content.component";
+
 
 @Component({
   selector: 'key-details',
@@ -14,5 +15,8 @@ import { CopyContentComponent } from "../../../shared/components/copy-content/co
 export class KeyDetailsComponent {
 
   public key = input.required<IKey>();
+
+
+  constructor(){}
 
 }
