@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/services/auth.service';
-import { merge } from 'rxjs';
+import { finalize, merge } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShoppService } from './store/shopp/services/shopp.service';
 import { NavbarComponent } from "./shared/components/navbar/navbar.component";

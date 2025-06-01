@@ -1,71 +1,104 @@
-<li class="bg-white shadow-md hover:shadow-lg transition-shadow rounded-2xl p-4 border border-gray-100">
-  <div class="flex justify-between items-center mb-2">
-    <div>
-      <h4 class="text-sm text-gray-500">Order ID:</h4>
-      <p class="text-gray-900 font-medium tracking-tight text-sm">{{ order().id }}</p>
+<li class="bg-white shadow-md hover:shadow-lg transition-shadow duration-200 rounded-2xl p-5 border border-gray-200 hover:border-gray-300">
+  <div class="flex justify-between items-start mb-4">
+    <div class="space-y-1">
+      <h4 class="text-xs font-light text-gray-400 uppercase tracking-wide">Order ID</h4>
+      <p class="text-gray-900 font-medium text-lg">{{ order().id }}</p>
     </div>
     <span
       [ngClass]="{
-        'bg-green-100 text-green-800': order().status === 'SUCCESSFULLY',
-        'bg-yellow-100 text-yellow-800': order().status === 'PROCESSING',
-        'bg-red-100 text-red-800': order().status === 'FAILED',
-        'bg-blue-100 text-blue-800': order().status === 'REFUND',
-        'bg-blue-100 text-indigo-600': order().status === 'PENDING_PAYMENT'
+        'bg-green-500 text-white': order().status === 'SUCCESSFULLY',
+        'bg-amber-500 text-white': order().status === 'PROCESSING',
+        'bg-red-500 text-white': order().status === 'FAILED',
+        'bg-blue-500 text-white': order().status === 'REFUND',
+        'bg-orange-500 text-white': order().status === 'PENDING_PAYMENT'
       }"
-      class="text-xs font-semibold px-3 py-1 rounded-full"
+      class="text-xs font-medium px-3 py-1.5 rounded-full"
     >
       {{ order().status }}
     </span>
   </div>
 
-  <div class="flex justify-between items-center border-t border-gray-100 pt-2 text-sm">
-    <div>
-      <p class="text-gray-500">Date:</p>
-      <p class="text-gray-900">{{ order().createdAt | date: 'mediumDate' }}</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 rounded-xl mb-4">
+    <div class="text-center md:text-left">
+      <p class="text-xs font-light text-gray-400 uppercase tracking-wide mb-1">Date</p>
+      <p class="text-gray-800 font-normal text-sm">{{ order().createdAt | date: 'mediumDate' }}</p>
     </div>
-    <div>
-      <p class="text-gray-500">Payment method:</p>
-      <p class="text-gray-900">{{ order().paymentMethod }}</p>
+    <div class="text-center">
+      <p class="text-xs font-light text-gray-400 uppercase tracking-wide mb-1">Payment Method</p>
+      <p class="text-gray-800 font-normal text-sm">{{ order().paymentMethod }}</p>
     </div>
-    <div class="text-right">
-      <p class="text-gray-500">Amount:</p>
-      <p class="text-lg font-semibold text-gray-900">{{ order().amount | currency:'USD' }}</p>
+    <div class="text-center md:text-right">
+      <p class="text-xs font-light text-gray-400 uppercase tracking-wide mb-1">Amount</p>
+      <p class="text-2xl font-light text-gray-900">{{ order().amount | currency:'USD' }}</p>
     </div>
   </div>
 
   @if (order().description) {
-    <div  class="mt-3 text-gray-600 text-sm italic border-t border-gray-100 pt-2">
-        {{ order().description }}
+    <div class="mb-4 p-3 bg-blue-50 rounded-xl border-l-3 border-blue-400">
+      <p class="text-sm text-gray-700 italic">
+        <span class="text-blue-600 font-medium">Note:</span> {{ order().description }}
+      </p>
     </div>
   }
 
   @if (order().products!.length) {
-    <div class="mt-3">
-        <h5 class="text-xs font-medium text-gray-500 mb-1">Productos:</h5>
-        <ul class="space-y-1 text-sm text-gray-700">
-            @for (p of order().products; track $index) {
-                <li>
-                    - Producto ID: <span class="font-medium">{{ p.productId }}</span> × <span>{{ p.quantity }}</span>
-                </li>
-            }
+    <div class="mb-5">
+      <h5 class="text-sm font-medium text-gray-700 mb-3 flex items-center">
+        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
+        Products
+      </h5>
+      <div class="bg-gray-50 rounded-xl p-3">
+        <ul class="space-y-2">
+          @for (p of order().products; track $index) {
+            <li class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-100">
+              <div class="flex items-center space-x-3">
+                <img
+                  class="w-12 h-12 rounded-lg object-cover border border-gray-200"
+                  [src]="p.image"
+                  alt="Product image"
+                >
+                <div class="flex-1">
+                  <p class="font-medium text-gray-800 text-sm">{{p.name}}</p>
+                  <p class="text-xs text-gray-500 font-light">Product Item</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="font-medium text-gray-900">{{p.price | currency}}</p>
+              </div>
+            </li>
+          }
         </ul>
+      </div>
     </div>
   }
 
   @if (order().status === 'FAILED') {
-    <div class="flex justify-center mt-6">
-        <button [disabled]="isLoading()" routerLink="/contact/support" mat-stroked-button class="mx-auto">Contact support</button>
+    <div class="flex justify-center">
+      <button 
+        [disabled]="isLoading()" 
+        routerLink="/contact/support" 
+        mat-stroked-button 
+        class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-full transition-colors duration-200 border-0 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Contact Support
+      </button>
     </div>
   }@else if (order().status != 'SUCCESSFULLY') {
-    <div class="flex justify-center mt-6">
-        <button [disabled]="isLoading()" (click)="continuePaymnt()" mat-flat-button class="mx-auto">Complete payment</button>
+    <div class="flex justify-center">
+      <button 
+        [disabled]="isLoading()" 
+        (click)="continuePaymnt()" 
+        mat-flat-button 
+        class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full transition-colors duration-200 border-0 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Complete Payment
+      </button>
     </div>
   }
 
   @if (error()) {
-    <div class="mt-2.5" >
+    <div class="mt-4 p-3 bg-red-50 rounded-xl border-l-3 border-red-400">
       <alert type="ERROR" [message]="error()!"/>
     </div>
   }
-
 </li>

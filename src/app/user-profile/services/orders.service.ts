@@ -26,6 +26,7 @@ export class OrdersService {
     return this.httpClient.get<IOrder[]>(`${this.url()}`, {headers})
       .pipe(
         tap(orders => this.orders.set(orders)),
+        tap(orders => console.log({orders})),
       );
   }
 

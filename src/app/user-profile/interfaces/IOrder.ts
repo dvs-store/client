@@ -1,4 +1,5 @@
 import { Id } from "../../shared/interfaces/api/Id";
+import { ISimpleProduct } from "../../store/products/interfaces/ISimpleProduct";
 import { OrderStatusType } from "../types/OrderStatusType";
 
 
@@ -12,6 +13,6 @@ export interface IOrder {
     paymentMethod: string;
     description:string;
     amount:number;
-    products:{productId:string; quantity:number;}[];
+    products:ISimpleProduct[];
 }
 

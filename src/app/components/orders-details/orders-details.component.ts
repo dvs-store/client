@@ -6,12 +6,11 @@ import { RouterLink } from '@angular/router';
 import { PaymentsService } from '../../store/services/payments.service';
 import { HandleErrorsFn } from '../../shared/functions/HandleErrorsFn';
 import { AlertComponent } from "../../shared/components/alert/alert.component";
-import { finalize } from 'rxjs';
 
 
 @Component({
   selector: 'orders-details',
-  imports: [DatePipe, CurrencyPipe, NgClass, MatButtonModule, RouterLink, AlertComponent],
+  imports: [DatePipe, CurrencyPipe, NgClass, MatButtonModule, RouterLink, AlertComponent, CurrencyPipe],
   templateUrl: './orders-details.component.html'
 })
 export class OrdersDetailsComponent {
@@ -32,7 +31,6 @@ export class OrdersDetailsComponent {
     this.isLoading.set(true);
 
     this.paymentsService.onContinuePay(this.order().id)
-      // .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (res) => {
           if( this.isBrowser ) location.href = res.url
